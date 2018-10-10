@@ -1,0 +1,22 @@
+<mat-toolbar class="header-bar" color="primary">
+  <mat-toolbar-row>
+    <span><a routerLink=""><img class="header-logo" src="assets/lyelt-logo.png"></a></span>
+    <span class="spacer"></span>
+    <a class="nav-item" routerLink="home">Spending</a>
+    <a class="nav-item" routerLink="budgets">Manage Budgets</a>
+    <a class="nav-item" routerLink="about">About</a>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <i class="material-icons">more_vert</i>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item>
+          <!--<i class="material-icons menu-icon">settings</i>-->
+          <span>Settings</span>
+      </button>
+      <button mat-menu-item>
+          <!--<i class="material-icons menu-icon">create</i>-->
+          <span>More</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>
