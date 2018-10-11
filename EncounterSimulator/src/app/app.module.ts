@@ -19,7 +19,11 @@ import { HomeComponent } from './home/home.component';
   imports: [
       BrowserModule,
       HttpModule,
-      RouterModule,
+      RouterModule.forRoot([
+      {
+        path: '', component: HomeComponent
+      }
+    ]),
       MaterialModule
   ],
   providers: [],

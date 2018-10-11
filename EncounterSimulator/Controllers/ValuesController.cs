@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EncounterSimulator.Models;
 using LyeltLogger;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +27,24 @@ namespace EncounterSimulator.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(new string[] { "value3", "value4" });
+            return Ok(new CharacterList
+            {
+              Characters = new List<Character>() {
+                new Character
+                    {
+                      Id = 1,
+                      Name = "Lily Masselin",
+                      MaxHP = 16,
+                      Initiative = 4
+                    },
+                new Character
+                    {
+                      Id = 2,
+                      Name = "Raza Granzyck",
+                      MaxHP = 14,
+                      Initiative = 8
+                    }
+            } });
         }
 
         // GET api/values/5

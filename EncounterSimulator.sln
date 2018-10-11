@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncounterSimulator", "Encou
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerCore", "..\LoggerCore\LoggerCore\LoggerCore.csproj", "{C0263DC1-635B-49DA-BDD2-1F3E1A214E68}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseConnectorCore", "..\DatabaseConnectorCore\DatabaseConnectorCore\DatabaseConnectorCore.csproj", "{DCE3B167-DA78-423F-8A65-01F54EE71844}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C0263DC1-635B-49DA-BDD2-1F3E1A214E68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0263DC1-635B-49DA-BDD2-1F3E1A214E68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0263DC1-635B-49DA-BDD2-1F3E1A214E68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCE3B167-DA78-423F-8A65-01F54EE71844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCE3B167-DA78-423F-8A65-01F54EE71844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCE3B167-DA78-423F-8A65-01F54EE71844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCE3B167-DA78-423F-8A65-01F54EE71844}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
