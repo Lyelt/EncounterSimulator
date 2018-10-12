@@ -15,9 +15,4 @@ namespace EncounterSimulator.Models
 
         public int Initiative { get; set; }
     }
-
-    public class CharacterList
-    {
-        public List<Character> Characters { get; set; }
-    }
 }

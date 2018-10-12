@@ -5,13 +5,12 @@ import {
     MatButtonModule, MatStepperModule, MatInputModule, MatFormFieldModule,
     MatAutocompleteModule, MatCardModule, MatDatepickerModule, MatNativeDateModule,
     MatExpansionModule, MatToolbarModule, MatSnackBarModule, MatMenuModule, MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatDialogModule
+    MatProgressSpinnerModule, MatDialogModule, MatTableModule, MatSortModule, MatCheckboxModule,
+    MatIconModule
 } from '@angular/material';
 
 const modules = [
     BrowserAnimationsModule,
-
     MatButtonModule,
     MatStepperModule,
     MatInputModule,
@@ -26,7 +25,11 @@ const modules = [
     MatMenuModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatSortModule,
+    MatCheckboxModule,
+    MatIconModule
 ]
 
 @NgModule({

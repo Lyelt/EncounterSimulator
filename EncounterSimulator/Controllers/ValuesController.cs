@@ -27,9 +27,7 @@ namespace EncounterSimulator.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(new CharacterList
-            {
-              Characters = new List<Character>() {
+            return Ok(new List<Character>() {
                 new Character
                     {
                       Id = 1,
@@ -44,7 +42,7 @@ namespace EncounterSimulator.Controllers
                       MaxHP = 14,
                       Initiative = 8
                     }
-            } });
+            });
         }
 
         // GET api/values/5

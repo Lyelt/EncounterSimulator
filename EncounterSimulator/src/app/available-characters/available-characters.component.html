@@ -1,0 +1,40 @@
+<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="select">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+      </mat-checkbox>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef>
+      <mat-icon>add</mat-icon>
+    </mat-footer-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+    <mat-cell *matCellDef="let character">{{character.name}}</mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="maxHP">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Max HP</mat-header-cell>
+    <mat-cell *matCellDef="let character">{{character.maxHP}}</mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnHeaders"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnHeaders;"
+           (click)="selection.toggle(row)"
+           class="character-row"></mat-row>
+  <mat-footer-row *matFooterRowDef="columnHeaders"></mat-footer-row>
+
+</mat-table>
