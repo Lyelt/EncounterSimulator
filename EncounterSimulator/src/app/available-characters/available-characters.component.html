@@ -5,7 +5,8 @@
     <mat-header-cell *matHeaderCellDef>
       <mat-checkbox (change)="$event ? masterToggle() : null"
                     [checked]="selection.hasValue() && isAllSelected()"
-                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    matTooltip="Select all characters">
       </mat-checkbox>
     </mat-header-cell>
     <mat-cell *matCellDef="let row">
@@ -15,7 +16,9 @@
       </mat-checkbox>
     </mat-cell>
     <mat-footer-cell *matFooterCellDef>
-      <mat-icon>add</mat-icon>
+      <mat-icon style="cursor: pointer;"
+                (click)="addCharacter()"
+                matTooltip="Add a new character">add</mat-icon>
     </mat-footer-cell>
   </ng-container>
 
@@ -28,6 +31,26 @@
   <ng-container matColumnDef="maxHP">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Max HP</mat-header-cell>
     <mat-cell *matCellDef="let character">{{character.maxHP}}</mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="ac">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Armor Class</mat-header-cell>
+    <mat-cell *matCellDef="let character">{{character.ac}}</mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="speed">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Speed</mat-header-cell>
+    <mat-cell *matCellDef="let character">{{character.speed}}</mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+    <mat-cell *matCellDef="let character">
+      <mat-icon style="cursor: pointer;" (click)="deleteCharacter(character.id)">delete</mat-icon>
+    </mat-cell>
     <mat-footer-cell *matFooterCellDef></mat-footer-cell>
   </ng-container>
 

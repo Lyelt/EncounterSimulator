@@ -10,27 +10,31 @@ import { SelectionModel } from '@angular/cdk/collections';
   templateUrl: './available-characters.component.html',
   styleUrls: ['./available-characters.component.css']
 })
+
+
 export class AvailableCharactersComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
+  BASE_URL = '/api/values';
   title = 'Encounter Simulator';
-  dataSource: MatTableDataSource<Character>;
-  columnHeaders = ['select', 'name', 'maxHP'];
-  selection = new SelectionModel<Character>(true, []);
+  dataSource: MatTableDataSource<AvailableCharacter>;
+  availableCharacters: AvailableCharacter[];
+  columnHeaders = ['select', 'name', 'maxHP', 'ac', 'speed', 'delete'];
+  selection = new SelectionModel<AvailableCharacter>(true, []);
 
   constructor(private http: Http) {
-    let availableCharacters: Character[] = [];
+    this.availableCharacters = [];
 
-    this.http.get('/api/values').subscribe(
+    this.http.get(this.BASE_URL).subscribe(
       result => {
         for (let character of result.json()) {
-          availableCharacters.push(character);
+          this.availableCharacters.push(character);
         }
       },
       error => {
-        console.error(error)
+        console.error(error);
       },
       () => {
-        this.dataSource = new MatTableDataSource(availableCharacters);
+        this.dataSource = new MatTableDataSource(this.availableCharacters);
         this.dataSource.sort = this.sort;
       });
   }
@@ -52,14 +56,37 @@ export class AvailableCharactersComponent implements OnInit {
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
+
+  addCharacter() {
+
+  }
+
+  deleteCharacter(id: number) {
+    this.http.delete(this.BASE_URL + '/' + id).subscribe(
+      result => {},
+      error => {
+        console.error(error);
+      },
+      () => {
+        const index = this.availableCharacters.findIndex(char => char.id === id);
+        this.availableCharacters.splice(index, 1);
+        this.refreshData();
+      });
+  }
+
+  refreshData() {
+    this.dataSource.data = this.availableCharacters;
+  }
 }
 
-class Character {
+class AvailableCharacter {
   id: number;
 
   name: string;
 
   maxHP: number;
 
-  initiative: number;
+  ac: number;
+
+  speed: number;
 }

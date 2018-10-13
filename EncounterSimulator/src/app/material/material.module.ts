@@ -6,7 +6,7 @@ import {
     MatAutocompleteModule, MatCardModule, MatDatepickerModule, MatNativeDateModule,
     MatExpansionModule, MatToolbarModule, MatSnackBarModule, MatMenuModule, MatProgressBarModule,
     MatProgressSpinnerModule, MatDialogModule, MatTableModule, MatSortModule, MatCheckboxModule,
-    MatIconModule
+    MatIconModule, MatTooltipModule
 } from '@angular/material';
 
 const modules = [
@@ -29,7 +29,8 @@ const modules = [
     MatTableModule,
     MatSortModule,
     MatCheckboxModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
 ]
 
 @NgModule({

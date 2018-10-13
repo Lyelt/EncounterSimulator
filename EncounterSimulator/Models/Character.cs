@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EncounterSimulator.Models
 {
-    public class Character
+    public class AvailableCharacter
     {
         public int Id { get; set; }
 
@@ -13,6 +13,8 @@ namespace EncounterSimulator.Models
 
         public int MaxHP { get; set; }
 
-        public int Initiative { get; set; }
+        public int AC { get; set; }
+
+        public int Speed { get; set; }
     }
 }

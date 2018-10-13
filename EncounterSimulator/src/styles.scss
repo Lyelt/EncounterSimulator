@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,700');
-@import "./lyelt-theme.scss";
-
+//@import "./lyelt-theme.scss";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 body {
   font-family: 'Raleway', 'Arial';
 }
@@ -11,18 +11,22 @@ ul {
   padding: 0;
 }
 
-  ul li {
-    display: inline;
-    margin-right: 30px;
-  }
+ul li {
+  display: inline;
+  margin-right: 30px;
+}
 
-    ul li a {
-      font-size: 1.5em;
-    }
+ul li a {
+  font-size: 1.5em;
+}
 
 a {
   text-decoration: none;
   cursor: pointer;
+}
+
+table {
+  width: 100%;
 }
 
 .mat-expansion-panel-header-title,

@@ -27,20 +27,22 @@ namespace EncounterSimulator.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(new List<Character>() {
-                new Character
+            return Ok(new List<AvailableCharacter>() {
+                new AvailableCharacter
                     {
                       Id = 1,
                       Name = "Lily Masselin",
                       MaxHP = 16,
-                      Initiative = 4
+                      Speed = 30,
+                      AC = 18
                     },
-                new Character
+                new AvailableCharacter
                     {
                       Id = 2,
                       Name = "Raza Granzyck",
                       MaxHP = 14,
-                      Initiative = 8
+                      Speed = 35,
+                      AC = 16
                     }
             });
         }
