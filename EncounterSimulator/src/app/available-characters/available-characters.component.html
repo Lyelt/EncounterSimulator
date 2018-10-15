@@ -1,63 +1,64 @@
 <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-  <!-- Checkbox Column -->
-  <ng-container matColumnDef="select">
-    <mat-header-cell *matHeaderCellDef>
-      <mat-checkbox (change)="$event ? masterToggle() : null"
-                    [checked]="selection.hasValue() && isAllSelected()"
-                    [indeterminate]="selection.hasValue() && !isAllSelected()"
-                    matTooltip="Select all characters">
-      </mat-checkbox>
-    </mat-header-cell>
-    <mat-cell *matCellDef="let row">
-      <mat-checkbox (click)="$event.stopPropagation()"
-                    (change)="$event ? selection.toggle(row) : null"
-                    [checked]="selection.isSelected(row)">
-      </mat-checkbox>
-    </mat-cell>
-    <mat-footer-cell *matFooterCellDef>
-      <mat-icon style="cursor: pointer;"
-                (click)="addCharacter()"
-                matTooltip="Add a new character">add</mat-icon>
-    </mat-footer-cell>
-  </ng-container>
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()"
+                          matTooltip="Select all characters">
+            </mat-checkbox>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+        </mat-cell>
+        <mat-footer-cell *matFooterCellDef>
+            <mat-icon style="cursor: pointer;"
+                      (click)="openDialog()"
+                      matTooltip="Add a new character">add</mat-icon>
+        </mat-footer-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-    <mat-cell *matCellDef="let character">{{character.name}}</mat-cell>
-    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
-  </ng-container>
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let character">{{character.name}} ({{character.owner == null ? 'NPC' : character.owner}})</mat-cell>
+        <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="maxHP">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Max HP</mat-header-cell>
-    <mat-cell *matCellDef="let character">{{character.maxHP}}</mat-cell>
-    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
-  </ng-container>
+    <ng-container matColumnDef="maxHP">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Max HP</mat-header-cell>
+        <mat-cell *matCellDef="let character">{{character.maxHP}}</mat-cell>
+        <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="ac">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Armor Class</mat-header-cell>
-    <mat-cell *matCellDef="let character">{{character.ac}}</mat-cell>
-    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
-  </ng-container>
+    <ng-container matColumnDef="ac">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Armor Class</mat-header-cell>
+        <mat-cell *matCellDef="let character">{{character.ac}}</mat-cell>
+        <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="speed">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Speed</mat-header-cell>
-    <mat-cell *matCellDef="let character">{{character.speed}}</mat-cell>
-    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
-  </ng-container>
+    <ng-container matColumnDef="speed">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Speed</mat-header-cell>
+        <mat-cell *matCellDef="let character">{{character.speed}}</mat-cell>
+        <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="delete">
-    <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
-    <mat-cell *matCellDef="let character">
-      <mat-icon style="cursor: pointer;" (click)="deleteCharacter(character.id)">delete</mat-icon>
-    </mat-cell>
-    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
-  </ng-container>
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Edit / Delete</mat-header-cell>
+        <mat-cell *matCellDef="let character">
+            <mat-icon matTooltip="Edit character" class="actions" (click)="openDialog(character)">edit</mat-icon>
+            <mat-icon matTooltip="Delete character" class="actions" (click)="deleteCharacter(character.id)">delete</mat-icon>
+        </mat-cell>
+        <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+    </ng-container>
 
-  <mat-header-row *matHeaderRowDef="columnHeaders"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: columnHeaders;"
-           (click)="selection.toggle(row)"
-           class="character-row"></mat-row>
-  <mat-footer-row *matFooterRowDef="columnHeaders"></mat-footer-row>
+    <mat-header-row *matHeaderRowDef="columnHeaders"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnHeaders;"
+             (click)="$event && $event.target.innerHTML != 'delete' && $event.target.innerHTML != 'edit' ? selection.toggle(row) : null"
+             class="character-row"></mat-row>
+    <mat-footer-row *matFooterRowDef="columnHeaders"></mat-footer-row>
 
 </mat-table>

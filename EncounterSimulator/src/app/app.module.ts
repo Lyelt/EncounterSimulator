@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { AvailableCharactersComponent } from './available-characters/available-characters.component';
+import { AddCharacterComponent } from './add-character/add-character.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AvailableCharactersComponent } from './available-characters/available-c
       HeaderComponent,
       FooterComponent,
       HomeComponent,
-      AvailableCharactersComponent
+      AvailableCharactersComponent,
+      AddCharacterComponent
   ],
   imports: [
       BrowserModule,
@@ -27,6 +29,14 @@ import { AvailableCharactersComponent } from './available-characters/available-c
       }
     ]),
       MaterialModule
+  ],
+  entryComponents: [
+      AddCharacterComponent,
+      AvailableCharactersComponent
+  ],
+  exports: [
+      AvailableCharactersComponent,
+      AddCharacterComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

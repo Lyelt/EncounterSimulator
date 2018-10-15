@@ -7,7 +7,7 @@
   background: #f5f5f5;
 }
 
-.action-button {
-  margin-left: 1em;
-  cursor: pointer;
+.actions {
+    margin-left: .25em;
+    cursor: pointer;
 }
