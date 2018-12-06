@@ -5,6 +5,7 @@
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
     <TypeScriptCompilerBlocked>true</TypeScriptCompilerBlocked>
     <PostBuildEvent>ng build --aot</PostBuildEvent>
+    <UserSecretsId>1ca97cf9-235d-4ba6-b72b-8ff1727097d7</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

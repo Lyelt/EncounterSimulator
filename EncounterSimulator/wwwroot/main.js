@@ -840,7 +840,11 @@ var AvailableCharactersComponent = /** @class */ (function () {
     };
     AvailableCharactersComponent.prototype.saveCharacter = function (data) {
         var _this = this;
-        var newCharacter = data.id == null || data.id == 0;
+        var newCharacter = false;
+        if (data.id == null) {
+            data.id = 0;
+            newCharacter = true;
+        }
         var request = newCharacter ? this.charService.saveCharacter(data) : this.charService.updateCharacter(data);
         request.subscribe(function (result) { }, function (error) {
             console.error(error);
@@ -1391,7 +1395,7 @@ _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["platformBrowser"]().boot
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! c:\Workspace\EncounterSimulator\EncounterSimulator\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Workspace\EncounterSimulator\EncounterSimulator\src\main.ts */"./src/main.ts");
 
 
 /***/ })

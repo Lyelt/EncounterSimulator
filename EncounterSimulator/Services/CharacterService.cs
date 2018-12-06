@@ -19,7 +19,7 @@ namespace EncounterSimulator.Services
         public CharacterService(ILoggerService _loggerService)
         {
             _log = _loggerService.GetLogger<CharacterService>();
-            DatabaseHelper.DefaultConnectionString = @"Data Source=NICK-HOME-PC;Initial Catalog=Encounter;Integrated Security=True";
+            DatabaseHelper.DefaultConnectionString = Environment.GetEnvironmentVariable("DefaultConnection") ?? @"Data Source=NICK-HOME-PC;Initial Catalog=Encounter;Integrated Security=True";
         }
 
         /// <summary>

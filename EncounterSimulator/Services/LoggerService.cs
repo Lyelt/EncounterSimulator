@@ -17,7 +17,7 @@ namespace EncounterSimulator.Services
         public Logger GetLogger()
         {
             var log = LogManager.GetGlobalLogger();
-            log.AddLogWriter(new LogFileWriter("GlobalWriter", @"C:\LyeltLogs"));
+            log.AddLogWriter(new LogFileWriter("GlobalWriter", @"LyeltLogs"));
             return log;
         }
 

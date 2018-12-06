@@ -72,7 +72,12 @@ export class AvailableCharactersComponent implements OnInit {
     }
 
     saveCharacter(data: AvailableCharacter) {
-        const newCharacter = data.id == null || data.id == 0;
+        let newCharacter = false;
+        if (data.id == null) {
+            data.id = 0;
+            newCharacter = true;
+        }
+
         let request: Observable<Object> = newCharacter ? this.charService.saveCharacter(data) : this.charService.updateCharacter(data);
 
         request.subscribe(
