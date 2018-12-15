@@ -98,7 +98,7 @@ namespace EncounterSimulator.Services
         {
             try
             {
-                var args = new object[] { "@name", character.Name, "@speed", character.Speed, "@ac", character.AC, "@owner", character.Owner == null ? "NPC" : character.Owner, "@maxHP", character.MaxHP };
+                var args = new object[] { "@name", character.Name, "@speed", character.Speed, "@ac", character.AC, "@owner", character.Owner == null ? "NPC" : character.Owner, "@maxHP", character.MaxHP, "@dexMod", character.DexModifier };
                 if (update)
                     args = args.Append("@id").Append(character.Id).ToArray();
 

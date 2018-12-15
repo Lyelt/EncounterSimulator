@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { AvailableCharacter } from './available-characters/available-characters.component';
+import { AvailableCharacter } from 'src/models/character';
 
 @Injectable({
   providedIn: 'root'

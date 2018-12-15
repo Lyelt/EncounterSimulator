@@ -21,6 +21,8 @@ namespace EncounterSimulator.Models
 
         public string Owner { get; set; }
 
+        public int DexModifier { get; set; }
+
         public static AvailableCharacter Create(SqlDataReader reader)
         {
             return new AvailableCharacter
@@ -30,7 +32,8 @@ namespace EncounterSimulator.Models
                 MaxHP = reader.GetInt("MaxHP"),
                 AC = reader.GetInt("AC"),
                 Speed = reader.GetInt("Speed"),
-                Owner = reader.GetString("Owner")
+                Owner = reader.GetString("Owner"),
+                DexModifier = reader.GetInt("DexModifier")
             };
         }
     }

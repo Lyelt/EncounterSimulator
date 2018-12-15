@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="src\models\character.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -23,6 +27,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\DatabaseConnectorCore\DatabaseConnectorCore\DatabaseConnectorCore.csproj" />
     <ProjectReference Include="..\..\LoggerCore\LoggerCore\LoggerCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="src\models\character.ts" />
   </ItemGroup>
 
 </Project>

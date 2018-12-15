@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { AvailableCharacter } from '../available-characters/available-characters.component';
+import { AvailableCharacter } from 'src/models/character';
 
 @Component({
   selector: 'app-add-character',
@@ -28,7 +28,8 @@ export class AddCharacterComponent implements OnInit {
             speed: [this.character.speed, [Validators.required, Validators.min(0)]],
             ac: [this.character.ac, [Validators.required, Validators.min(0)]],
             maxHP: [this.character.maxHP, [Validators.required, Validators.min(0)]],
-            owner: [this.character.owner]
+            owner: [this.character.owner],
+            dexModifier: [this.character.dexModifier]
         });
 
         this.checkNpc();

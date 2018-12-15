@@ -10,6 +10,9 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { AvailableCharactersComponent } from './available-characters/available-characters.component';
 import { AddCharacterComponent } from './add-character/add-character.component';
+import { PreparationComponent } from './preparation/preparation.component';
+import { FightComponent } from './fight/fight.component';
+import { CharacterSharingService } from './character-sharing.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { AddCharacterComponent } from './add-character/add-character.component';
       FooterComponent,
       HomeComponent,
       AvailableCharactersComponent,
-      AddCharacterComponent
+      AddCharacterComponent,
+      PreparationComponent,
+      FightComponent
   ],
   imports: [
       BrowserModule,
@@ -37,8 +42,8 @@ import { AddCharacterComponent } from './add-character/add-character.component';
   exports: [
       AvailableCharactersComponent,
       AddCharacterComponent
-  ],
-  providers: [],
+    ],
+  providers: [CharacterSharingService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

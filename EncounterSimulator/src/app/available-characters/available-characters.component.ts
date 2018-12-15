@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
+import { Component, OnInit, ViewChild, Injectable, Output } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { DataSource } from '@angular/cdk/collections';
@@ -6,6 +6,8 @@ import { MatSort, MatTableDataSource, MatDialog, MatDialogConfig } from '@angula
 import { SelectionModel } from '@angular/cdk/collections';
 import { AddCharacterComponent } from '../add-character/add-character.component';
 import { CharacterService } from '../character.service';
+import { AvailableCharacter } from 'src/models/character';
+import { CharacterSharingService } from '../character-sharing.service';
 
 @Component({
   selector: 'app-available-characters',
@@ -15,14 +17,14 @@ import { CharacterService } from '../character.service';
     
 export class AvailableCharactersComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
-    
+
     title = 'Encounter Simulator';
     dataSource: MatTableDataSource<AvailableCharacter>;
     availableCharacters: AvailableCharacter[];
-    columnHeaders = ['select', 'name', 'maxHP', 'ac', 'speed', 'actions'];
+    columnHeaders = ['select', 'name', 'maxHP', 'ac', 'speed', 'dexModifier', 'actions'];
     selection = new SelectionModel<AvailableCharacter>(true, []);
 
-    constructor(private charService: CharacterService, private dialog: MatDialog) {
+    constructor(private charService: CharacterService, private selectedCharService: CharacterSharingService, private dialog: MatDialog) {
         this.availableCharacters = [];
 
         charService.getAvailableCharacters().subscribe(result => {
@@ -41,6 +43,10 @@ export class AvailableCharactersComponent implements OnInit {
 
     ngOnInit() {
 
+    }
+
+    sendSelectedCharacters() {
+        this.selectedCharService.setSelected(this.selection.selected);
     }
 
     /** Whether the number of selected elements matches the total number of rows. */
@@ -72,6 +78,7 @@ export class AvailableCharactersComponent implements OnInit {
     }
 
     saveCharacter(data: AvailableCharacter) {
+        this.selection.clear();
         let newCharacter = false;
         if (data.id == null) {
             data.id = 0;
@@ -110,18 +117,4 @@ export class AvailableCharactersComponent implements OnInit {
                 this.refreshData();
             });
     }
-}
-
-export class AvailableCharacter {
-    id: number;
-
-    name: string;
-
-    maxHP: number;
-
-    ac: number;
-
-    speed: number;
-
-    owner: string;
 }

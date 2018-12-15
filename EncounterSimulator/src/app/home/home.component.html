@@ -5,12 +5,13 @@
       <ng-template matStepLabel>Manage and select your characters</ng-template>
       <app-available-characters></app-available-characters>
       <div>
-        <button color="primary" mat-raised-button class="step" matStepperNext>Begin</button>
+        <button (click)="sendSelectedCharacters()" color="primary" mat-raised-button class="step" matStepperNext>Begin</button>
       </div>
   </mat-step>
 
   <mat-step>
-      <ng-template matStepLabel>Prepare for battle</ng-template>
+      <ng-template matStepLabel><div (click)="sendSelectedCharacters()">Prepare for battle</div></ng-template>
+      <app-preparation></app-preparation>
       <div>
         <button color="primary" mat-raised-button class="step" matStepperPrevious>Back</button>
         <button color="primary" mat-raised-button class="step" matStepperNext>Next</button>
@@ -19,7 +20,7 @@
 
   <mat-step>
     <ng-template matStepLabel>Fight!</ng-template>
-    
+    <app-fight></app-fight>
     <div>
       <button mat-raised-button matStepperPrevious class="step" color="primary">Back</button>
       <button mat-raised-button (click)="stepper.reset()" color="accent">Start Over</button>
