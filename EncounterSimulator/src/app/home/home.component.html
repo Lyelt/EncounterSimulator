@@ -14,12 +14,12 @@
       <app-preparation></app-preparation>
       <div>
         <button color="primary" mat-raised-button class="step" matStepperPrevious>Back</button>
-        <button color="primary" mat-raised-button class="step" matStepperNext>Next</button>
+        <button color="primary" mat-raised-button class="step" matStepperNext (click)="beginFight()">Begin fight!</button>
       </div>
   </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel>Fight!</ng-template>
+    <ng-template matStepLabel><div (click)="beginFight()">Fight!</div></ng-template>
     <app-fight></app-fight>
     <div>
       <button mat-raised-button matStepperPrevious class="step" color="primary">Back</button>

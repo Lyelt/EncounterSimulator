@@ -12,4 +12,6 @@
     owner: string;
 
     dexModifier: number;
+
+    initiativeRoll: number;
 }

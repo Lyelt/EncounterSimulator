@@ -78,7 +78,8 @@ export class AvailableCharactersComponent implements OnInit {
     }
 
     saveCharacter(data: AvailableCharacter) {
-        this.selection.clear();
+        this.resetSelections();
+
         let newCharacter = false;
         if (data.id == null) {
             data.id = 0;
@@ -106,6 +107,8 @@ export class AvailableCharactersComponent implements OnInit {
     }
 
     deleteCharacter(id) {
+        this.resetSelections();
+
         this.charService.deleteCharacter(id).subscribe(
             result => { },
             error => {
@@ -116,5 +119,10 @@ export class AvailableCharactersComponent implements OnInit {
                 this.availableCharacters.splice(index, 1);
                 this.refreshData();
             });
+    }
+
+    resetSelections() {
+        this.selection.clear();
+        this.selectedCharService.setSelected(<AvailableCharacter[]>[]);
     }
 }
