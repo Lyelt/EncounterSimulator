@@ -45,3 +45,21 @@ table {
 .container {
   display: flex;
 }
+
+.container-vertical {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-vertical > * {
+    width: 100%;
+}
+
+.container-horizontal {
+    display: flex;
+    flex-direction: row;
+}
+
+.container-horizontal > * {
+    width: 100%;
+}

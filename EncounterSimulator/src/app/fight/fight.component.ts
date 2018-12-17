@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CharacterSharingService } from 'src/app/character-sharing.service';
-import { AvailableCharacter } from 'src/models/character';
+import { AvailableCharacter, ActiveCharacter } from 'src/models/character';
 
 @Component({
   selector: 'app-fight',
@@ -8,7 +8,8 @@ import { AvailableCharacter } from 'src/models/character';
   styleUrls: ['./fight.component.css']
 })
 export class FightComponent implements OnInit {
-    characters: AvailableCharacter[];
+    characters: ActiveCharacter[];
+    step = 0;
 
     constructor(private selectedCharService: CharacterSharingService) {
 
@@ -18,7 +19,18 @@ export class FightComponent implements OnInit {
     }
 
     initializeCharacters() {
-        this.characters = this.selectedCharService.getSelected();
+        this.characters = this.selectedCharService.getSelectedAsActive();
     }
 
+    setStep(index: number) {
+        this.step = index;
+    }
+
+    nextStep() {
+        this.step++;
+    }
+
+    prevStep() {
+        this.step--;
+    }
 }

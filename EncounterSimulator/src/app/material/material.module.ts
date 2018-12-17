@@ -7,7 +7,7 @@ import {
     MatAutocompleteModule, MatCardModule, MatDatepickerModule, MatNativeDateModule,
     MatExpansionModule, MatToolbarModule, MatSnackBarModule, MatMenuModule, MatProgressBarModule,
     MatProgressSpinnerModule, MatDialogModule, MatTableModule, MatSortModule, MatCheckboxModule,
-    MatIconModule, MatTooltipModule
+    MatIconModule, MatTooltipModule, MatSelectModule
 } from '@angular/material';
 
 
@@ -34,7 +34,8 @@ const modules = [
     MatSortModule,
     MatCheckboxModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectModule
 ]
 
 @NgModule({

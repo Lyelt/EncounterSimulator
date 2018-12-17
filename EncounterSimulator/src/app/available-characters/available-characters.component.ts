@@ -77,16 +77,32 @@ export class AvailableCharactersComponent implements OnInit {
         dialogRef.afterClosed().subscribe(data => this.saveCharacter(data));
     }
 
-    saveCharacter(data: AvailableCharacter) {
+    saveCharacter(data: any) {
+        let character: AvailableCharacter = data.character;
+        let quantity: number = data.quantity;
+
         this.resetSelections();
 
         let newCharacter = false;
-        if (data.id == null) {
-            data.id = 0;
+        if (character.id == null) {
+            character.id = 0;
             newCharacter = true;
         }
 
-        let request: Observable<Object> = newCharacter ? this.charService.saveCharacter(data) : this.charService.updateCharacter(data);
+        if (quantity <= 1) {
+            this.sendRequest(character, newCharacter);
+        }
+        else {
+            let baseName = character.name;
+            for (let i: number = 1; i <= quantity; i++) {
+                character.name = baseName + " " + i;
+                this.sendRequest(character);
+            }
+        }
+    }
+
+    sendRequest(character: AvailableCharacter, newCharacter: boolean = true) {
+        let request: Observable<Object> = newCharacter ? this.charService.saveCharacter(character) : this.charService.updateCharacter(character);
 
         request.subscribe(
             result => { },
@@ -95,13 +111,13 @@ export class AvailableCharactersComponent implements OnInit {
             },
             () => {
                 if (newCharacter) {
-                    this.availableCharacters.push(data);
+                    this.availableCharacters.push(character);
                 }
                 else {
-                    const index = this.availableCharacters.findIndex(char => char.id === data.id);
-                    this.availableCharacters[index] = data;
+                    const index = this.availableCharacters.findIndex(char => char.id === character.id);
+                    this.availableCharacters[index] = character;
                 }
-                
+
                 this.refreshData();
             });
     }

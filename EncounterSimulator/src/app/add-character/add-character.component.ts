@@ -13,12 +13,14 @@ export class AddCharacterComponent implements OnInit {
     character: AvailableCharacter;
 
     isNpc: boolean;
+    quantity: number;
 
     constructor(private fb: FormBuilder,
                 private dialogRef: MatDialogRef<AddCharacterComponent>,
                 @Inject(MAT_DIALOG_DATA) data) {
         this.character = data;
         this.isNpc = this.character.owner == null || this.character.owner.toLowerCase() == 'npc';
+        this.quantity = 1;
     }
 
     ngOnInit() {
@@ -29,21 +31,26 @@ export class AddCharacterComponent implements OnInit {
             ac: [this.character.ac, [Validators.required, Validators.min(0)]],
             maxHP: [this.character.maxHP, [Validators.required, Validators.min(0)]],
             owner: [this.character.owner],
-            dexModifier: [this.character.dexModifier]
+            dexModifier: [this.character.dexModifier],
+            quantity: [this.quantity, [Validators.min(1)]]
         });
 
         this.checkNpc();
     }
 
     checkNpc() {
-        if (this.isNpc)
+        if (this.isNpc) {
             this.form.get('owner').disable();
-        else
+            this.form.get('quantity').enable();
+        }
+        else {
             this.form.get('owner').enable();
+            this.form.get('quantity').disable();
+        }
     }
 
     save() {
-        this.dialogRef.close(this.form.value);
+        this.dialogRef.close({ character: this.form.value, quantity: this.quantity });
     }
 
     close() {

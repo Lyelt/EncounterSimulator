@@ -1,3 +1,50 @@
-<p *ngFor="let character of characters">
-  {{character.name}} rolled a {{character.initiativeRoll}}
-</p>
+<mat-accordion class="example-headers-align">
+    <mat-expansion-panel *ngFor="let character of characters; let i = index" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{i+1}}. {{character.name}}
+            </mat-panel-title>
+            <mat-panel-description>
+                <div>
+                    <mat-icon matTooltip="Current HP / Max HP">favorite_border</mat-icon>
+                    {{character.currentHP}} / {{character.maxHP}}
+                </div>
+
+                <div>
+                    <mat-icon matTooltip="Armor Class">security</mat-icon>
+                    {{character.ac}}
+                </div>
+
+                <div *ngIf="character.dexModifier >= 0">
+                    <mat-icon matTooltip="Dexterity Modifier">directions_run</mat-icon>
+                    +{{character.dexModifier}}
+                </div>
+                <div *ngIf="character.dexModifier < 0">
+                    <mat-icon matTooltip="Dexterity Modifier">directions_run</mat-icon>
+                    {{character.dexModifier}}
+                </div>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="container-vertical">
+            <mat-form-field>
+                <mat-select placeholder="Select an action">
+                    <mat-option value="Attack">Attack</mat-option>
+                    <mat-option value="Dash">Dash</mat-option>
+                    <mat-option value="Disengage">Disengage</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select placeholder="Select a target">
+                    <mat-option *ngFor="let character of characters" [value]="character.id">{{character.name}}</mat-option>
+                    <mat-option value="-1">Other</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <mat-action-row>
+            <button mat-button color="primary" (click)="nextStep()">End Turn</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>

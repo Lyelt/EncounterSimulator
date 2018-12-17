@@ -29,6 +29,11 @@
             </td>
             <td>
                 <mat-form-field>
+                    <input matInput placeholder="Quantity" formControlName="quantity" value="1" [(ngModel)]="quantity" />
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field>
                     <input matInput placeholder="Owner" formControlName="owner" value="{{character.owner}}" />
                 </mat-form-field>
             </td>
