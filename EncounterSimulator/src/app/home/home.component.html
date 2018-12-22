@@ -14,7 +14,7 @@
       <app-preparation></app-preparation>
       <div>
         <button color="primary" mat-raised-button class="step" matStepperPrevious>Back</button>
-        <button color="primary" mat-raised-button class="step" matStepperNext (click)="beginFight()">Begin fight!</button>
+        <button color="warn" mat-raised-button class="step" matStepperNext (click)="beginFight()">Begin fight!</button>
       </div>
   </mat-step>
 
@@ -23,7 +23,7 @@
     <app-fight></app-fight>
     <div>
       <button mat-raised-button matStepperPrevious class="step" color="primary">Back</button>
-      <button mat-raised-button (click)="stepper.reset()" color="accent">Start Over</button>
+      <button mat-raised-button (click)="stepper.reset(); restartFight();" color="warn">Start Over</button>
     </div>
   </mat-step>
 

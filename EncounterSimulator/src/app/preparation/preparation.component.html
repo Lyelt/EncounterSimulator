@@ -1,8 +1,9 @@
+<button mat-raised-button color="accent" (click)="rollAllInitiatives()" class="roll-button">Roll All Initiatives</button>
 <p *ngFor="let character of characters">
     <mat-form-field>
-        <mat-label>Initiative</mat-label>
+        <mat-label>{{character.name}}</mat-label>
         <input id="Initiative{{character.id}}" matInput [placeholder]="character.dexModifier">
         <mat-icon class="roller" matTooltip="Roll initiative with a bonus of {{character.dexModifier}}" (click)="rollInitiative(character)" matSuffix>autorenew</mat-icon>
-        <mat-hint>{{character.name}}</mat-hint>
+        <mat-hint>Initiative</mat-hint>
     </mat-form-field>
 </p>

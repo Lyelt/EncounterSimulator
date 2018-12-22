@@ -23,6 +23,12 @@ export class PreparationComponent implements OnInit {
         this.characters = this.selectedCharService.getSelected();
     }
 
+    rollAllInitiatives() {
+        for (let character of this.characters) {
+            this.rollInitiative(character);
+        }
+    }
+
     rollInitiative(character: AvailableCharacter) {
         let roll = this.utilService.randomIntFromInterval(1, 20) + character.dexModifier;
 

@@ -14,6 +14,8 @@ namespace EncounterSimulator.Interfaces
 
         bool SaveCharacter(AvailableCharacter character);
 
+        bool SaveCharacters(List<AvailableCharacter> characters);
+
         bool UpdateCharacter(AvailableCharacter character);
     }
 }

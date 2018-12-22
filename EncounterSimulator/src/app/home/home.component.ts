@@ -28,4 +28,8 @@ export class HomeComponent implements OnInit {
         this.prep.refreshSelectedCharacters();
         this.fight.initializeCharacters();
     }
+
+    restartFight() {
+        this.chars.restart();
+    }
 }

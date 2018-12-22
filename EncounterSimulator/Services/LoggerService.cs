@@ -23,6 +23,7 @@ namespace EncounterSimulator.Services
 
         public Logger GetLogger<T>()
         {
+            LogManager.SetDefaults(new LogOptions { SynchronousLogging = true, Verbosity = Enums.LogLevel.Debug });
             var log = LogManager.GetLogger<T>();
             log.AddLogWriter(new LogFileWriter(string.Concat(nameof(T), "Writer"), @"C:\LyeltLogs"));
             return log;

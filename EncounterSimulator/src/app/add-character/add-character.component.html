@@ -25,7 +25,7 @@
     <table class="fullWidth" cellspacing="0">
         <tr>
             <td>
-                <mat-checkbox matInput [(ngModel)]="isNpc" [ngModelOptions]="{standalone: true}" (change)="checkNpc()" labelPosition="after">NPC</mat-checkbox>
+                <mat-checkbox matInput [(ngModel)]="isNpc" [ngModelOptions]="{standalone: true}" (change)="toggleFormControls(character.id)" labelPosition="after">NPC</mat-checkbox>
             </td>
             <td>
                 <mat-form-field>

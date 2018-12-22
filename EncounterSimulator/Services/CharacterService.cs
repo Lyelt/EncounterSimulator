@@ -85,6 +85,22 @@ namespace EncounterSimulator.Services
         }
 
         /// <summary>
+        ///     Save multiple new characters to the database
+        /// </summary>
+        /// <param name="character">Character to save</param>
+        /// <returns>The success or failure of the save operation</returns>
+        public bool SaveCharacters(List<AvailableCharacter> characters)
+        {
+            foreach (var character in characters)
+            {
+                if (!UpsertCharacter(character, false))
+                    return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         ///     Update information about an existing character
         /// </summary>
         /// <param name="character">Character to update</param>

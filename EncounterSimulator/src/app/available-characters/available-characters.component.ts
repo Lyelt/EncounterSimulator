@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Injectable, Output } from '@angular/core';
 import { Http } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { DataSource } from '@angular/cdk/collections';
 import { MatSort, MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -17,28 +17,13 @@ import { CharacterSharingService } from '../character-sharing.service';
     
 export class AvailableCharactersComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
-
-    title = 'Encounter Simulator';
     dataSource: MatTableDataSource<AvailableCharacter>;
     availableCharacters: AvailableCharacter[];
     columnHeaders = ['select', 'name', 'maxHP', 'ac', 'speed', 'dexModifier', 'actions'];
     selection = new SelectionModel<AvailableCharacter>(true, []);
 
     constructor(private charService: CharacterService, private selectedCharService: CharacterSharingService, private dialog: MatDialog) {
-        this.availableCharacters = [];
-
-        charService.getAvailableCharacters().subscribe(result => {
-            for (let character of result.json()) {
-                this.availableCharacters.push(character);
-            }
-        },
-        error => {
-            console.error(error);
-        },
-        () => {
-            this.dataSource = new MatTableDataSource(this.availableCharacters);
-            this.dataSource.sort = this.sort;
-        });
+        this.refreshData();
     }
 
     ngOnInit() {
@@ -47,6 +32,11 @@ export class AvailableCharactersComponent implements OnInit {
 
     sendSelectedCharacters() {
         this.selectedCharService.setSelected(this.selection.selected);
+    }
+
+    restart() {
+        this.resetSelections();
+        this.refreshData();
     }
 
     /** Whether the number of selected elements matches the total number of rows. */
@@ -64,7 +54,19 @@ export class AvailableCharactersComponent implements OnInit {
     }
     
     refreshData() {
-        this.dataSource.data = this.availableCharacters;
+        this.availableCharacters = [];
+        this.charService.getAvailableCharacters().subscribe(result => {
+            for (let character of result.json()) {
+                this.availableCharacters.push(character);
+            }
+        },
+        error => {
+            console.error(error);
+        },
+        () => {
+            this.dataSource = new MatTableDataSource(this.availableCharacters);
+            this.dataSource.sort = this.sort;
+        });
     }
 
     openDialog(character: AvailableCharacter) {
@@ -77,49 +79,41 @@ export class AvailableCharactersComponent implements OnInit {
         dialogRef.afterClosed().subscribe(data => this.saveCharacter(data));
     }
 
+    // The user clicked save and we have all of the form data available
     saveCharacter(data: any) {
         let character: AvailableCharacter = data.character;
-        let quantity: number = data.quantity;
+        const newCharacter = character.id == null;  // If no ID, we know the character doesn't exist yet
+        const baseName = character.name;            // In case we need to enumerate the name
 
+        if (newCharacter)
+            character.id = 0;
+
+        // Clear any currently selected characters from the table
         this.resetSelections();
 
-        let newCharacter = false;
-        if (character.id == null) {
-            character.id = 0;
-            newCharacter = true;
-        }
-
-        if (quantity <= 1) {
-            this.sendRequest(character, newCharacter);
-        }
-        else {
-            let baseName = character.name;
-            for (let i: number = 1; i <= quantity; i++) {
-                character.name = baseName + " " + i;
-                this.sendRequest(character);
+        let characters: AvailableCharacter[] = [];
+        for (let i: number = 1; i <= data.quantity; i++) {
+            if (data.quantity <= 1) {
+                characters.push(character);
+            }
+            else {
+                // Make a shallow copy of the character and give it a new name
+                let newCharacter: AvailableCharacter = Object.assign(new AvailableCharacter(), character);
+                newCharacter.name = baseName + " " + i;
+                characters.push(newCharacter);
             }
         }
-    }
 
-    sendRequest(character: AvailableCharacter, newCharacter: boolean = true) {
-        let request: Observable<Object> = newCharacter ? this.charService.saveCharacter(character) : this.charService.updateCharacter(character);
-
+        let request: Observable<Object> = newCharacter ? this.charService.saveCharacters(characters) : this.charService.updateCharacter(characters[0]);
         request.subscribe(
             result => { },
             error => {
                 console.error(error);
             },
             () => {
-                if (newCharacter) {
-                    this.availableCharacters.push(character);
-                }
-                else {
-                    const index = this.availableCharacters.findIndex(char => char.id === character.id);
-                    this.availableCharacters[index] = character;
-                }
-
                 this.refreshData();
-            });
+            }
+        );
     }
 
     deleteCharacter(id) {
@@ -131,8 +125,6 @@ export class AvailableCharactersComponent implements OnInit {
                 console.error(error);
             },
             () => {
-                const index = this.availableCharacters.findIndex(char => char.id === id);
-                this.availableCharacters.splice(index, 1);
                 this.refreshData();
             });
     }

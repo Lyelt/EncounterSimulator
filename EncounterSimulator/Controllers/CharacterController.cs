@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EncounterSimulator.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     public class CharacterController : Controller
     {
         private readonly ICharacterService _characterService;
@@ -20,6 +20,7 @@ namespace EncounterSimulator.Controllers
         }
 
         [HttpGet]
+        [Route("Character/GetAvailableCharacters")]
         public IActionResult GetAvailableCharacters()
         {
             if (!ModelState.IsValid)
@@ -29,6 +30,7 @@ namespace EncounterSimulator.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Route("Character/DeleteCharacter/{id}")]
         public IActionResult DeleteCharacter(int id)
         {
             if (!ModelState.IsValid)
@@ -40,6 +42,7 @@ namespace EncounterSimulator.Controllers
         }
 
         [HttpPost]
+        [Route("Character/SaveCharacter")]
         public IActionResult SaveCharacter([FromBody]AvailableCharacter character)
         {
             return _characterService.SaveCharacter(character) ?
@@ -47,7 +50,17 @@ namespace EncounterSimulator.Controllers
                 BadRequest("Error saving character") as IActionResult;
         }
 
+        [HttpPost]
+        [Route("Character/SaveCharacters")]
+        public IActionResult SaveCharacters([FromBody]List<AvailableCharacter> characters)
+        {
+            return _characterService.SaveCharacters(characters) ?
+                Ok() as IActionResult :
+                BadRequest("Error saving characters") as IActionResult;
+        }
+
         [HttpPut]
+        [Route("Character/UpdateCharacter")]
         public IActionResult UpdateCharacter([FromBody]AvailableCharacter character)
         {
             return _characterService.UpdateCharacter(character) ?

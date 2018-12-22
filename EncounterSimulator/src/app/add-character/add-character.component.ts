@@ -35,16 +35,22 @@ export class AddCharacterComponent implements OnInit {
             quantity: [this.quantity, [Validators.min(1)]]
         });
 
-        this.checkNpc();
+        this.toggleFormControls(this.character.id);
     }
 
-    checkNpc() {
+    toggleFormControls(id: number) {
+        // If this is an NPC, we can't set the owner but we can change the quantity of them
         if (this.isNpc) {
             this.form.get('owner').disable();
             this.form.get('quantity').enable();
         }
         else {
             this.form.get('owner').enable();
+            this.form.get('quantity').disable();
+        }
+
+        // If this is an existing character, though, we can't change the quantity
+        if (id > 0) {
             this.form.get('quantity').disable();
         }
     }
