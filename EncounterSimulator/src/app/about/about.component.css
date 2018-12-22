@@ -1,0 +1,20 @@
+.card-header {
+    background-color: #F1F1F1;
+}
+
+.card-margin {
+    margin: 2em 1em 2em 1em;
+}
+
+mat-card {
+    padding: 0 0 0 0 !important;
+}
+
+mat-card-content {
+    padding-bottom: 2em;
+    padding-top: 2em;
+}
+
+mat-divider {
+    margin: 0 2em 1em 1em;
+}

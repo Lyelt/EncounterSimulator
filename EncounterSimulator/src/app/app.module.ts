@@ -13,6 +13,7 @@ import { AddCharacterComponent } from './add-character/add-character.component';
 import { PreparationComponent } from './preparation/preparation.component';
 import { FightComponent } from './fight/fight.component';
 import { CharacterSharingService } from './character-sharing.service';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -23,15 +24,19 @@ import { CharacterSharingService } from './character-sharing.service';
       AvailableCharactersComponent,
       AddCharacterComponent,
       PreparationComponent,
-      FightComponent
+      FightComponent,
+      AboutComponent
   ],
   imports: [
       BrowserModule,
       HttpModule,
       RouterModule.forRoot([
-      {
-        path: '', component: HomeComponent
-      }
+          {
+              path: '', component: HomeComponent
+          },
+          {
+              path: 'about', component: AboutComponent
+          }
     ]),
       MaterialModule
   ],
