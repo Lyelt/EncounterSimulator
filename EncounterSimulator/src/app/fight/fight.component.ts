@@ -22,15 +22,9 @@ export class FightComponent implements OnInit {
         this.characters = this.selectedCharService.getSelectedAsActive();
     }
 
-    setStep(index: number) {
-        this.step = index;
-    }
-
-    nextStep() {
+    endTurn() {
         this.step++;
-    }
-
-    prevStep() {
-        this.step--;
+        if (this.step == this.characters.length)
+            this.step = 0;
     }
 }

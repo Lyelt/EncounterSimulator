@@ -2,48 +2,52 @@
 //@import "./lyelt-theme.scss";
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 body {
-  font-family: 'Raleway', 'Arial';
+    font-family: 'Raleway', 'Arial';
 }
 
 ul {
-  list-style-type: none;
-  margin: 0 0 2em 0;
-  padding: 0;
+    list-style-type: none;
+    margin: 0 0 2em 0;
+    padding: 0;
 }
 
 ul li {
-  display: inline;
-  margin-right: 30px;
+    display: inline;
+    margin-right: 30px;
 }
 
 ul li a {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 a {
-  cursor: pointer;
+    cursor: pointer;
+}
+
+mat-icon {
+    cursor: pointer;
 }
 
 table {
-  width: 100%;
+    width: 100%;
 }
 
 .mat-expansion-panel-header-title,
 .mat-expansion-panel-header-description {
-  flex-basis: 0;
+    flex-basis: 0;
 }
 
 .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .mat-toolbar-row {
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 .container {
-  display: flex;
+    display: flex;
 }
 
 .container-vertical {

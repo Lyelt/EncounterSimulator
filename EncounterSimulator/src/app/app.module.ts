@@ -14,6 +14,7 @@ import { PreparationComponent } from './preparation/preparation.component';
 import { FightComponent } from './fight/fight.component';
 import { CharacterSharingService } from './character-sharing.service';
 import { AboutComponent } from './about/about.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AboutComponent } from './about/about.component';
       AddCharacterComponent,
       PreparationComponent,
       FightComponent,
-      AboutComponent
+      AboutComponent,
+      SidenavComponent
   ],
   imports: [
       BrowserModule,

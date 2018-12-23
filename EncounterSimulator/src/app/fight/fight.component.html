@@ -1,7 +1,10 @@
 <mat-accordion class="example-headers-align">
-    <mat-expansion-panel *ngFor="let character of characters; let i = index" [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+    <mat-expansion-panel *ngFor="let character of characters; let i = index" [expanded]="step === i" (opened)="this.step = i;" hideToggle>
         <mat-expansion-panel-header>
             <mat-panel-title>
+                <div class="spinner-wrapper">
+                    <mat-progress-spinner *ngIf="step === i" color="accent" mode="indeterminate" [diameter]="20"></mat-progress-spinner>
+                </div>
                 {{i+1}}. {{character.name}}
             </mat-panel-title>
             <mat-panel-description>
@@ -27,24 +30,37 @@
         </mat-expansion-panel-header>
 
         <div class="container-vertical">
-            <mat-form-field>
-                <mat-select placeholder="Select an action">
-                    <mat-option value="Attack">Attack</mat-option>
-                    <mat-option value="Dash">Dash</mat-option>
-                    <mat-option value="Disengage">Disengage</mat-option>
-                </mat-select>
-            </mat-form-field>
+            <div class="container-horizontal">
+                <mat-form-field>
+                    <mat-select placeholder="Select an action">
+                        <mat-option value="Attack">Attack</mat-option>
+                        <mat-option value="Dash">Dash</mat-option>
+                        <mat-option value="Disengage">Disengage</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-            <mat-form-field>
-                <mat-select placeholder="Select a target">
-                    <mat-option *ngFor="let character of characters" [value]="character.id">{{character.name}}</mat-option>
-                    <mat-option value="-1">Other</mat-option>
-                </mat-select>
-            </mat-form-field>
+                <mat-form-field>
+                    <mat-select placeholder="Select a target">
+                        <mat-option *ngFor="let character of characters" [value]="character.id">{{character.name}}</mat-option>
+                        <mat-option value="-1">Other</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput type="number" placeholder="Enter a value" />
+                    <mat-hint align="end">damage</mat-hint>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field style="width: 100%;">
+                    <textarea matInput placeholder="Enter some flavor text"></textarea>
+                </mat-form-field>
+            </div>
         </div>
+        
 
         <mat-action-row>
-            <button mat-raised-button color="accent" (click)="nextStep()">End Turn</button>
+            <button mat-raised-button color="accent" (click)="endTurn()">End Turn</button>
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>
