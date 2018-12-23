@@ -15,6 +15,8 @@ import { FightComponent } from './fight/fight.component';
 import { CharacterSharingService } from './character-sharing.service';
 import { AboutComponent } from './about/about.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { ManageCharactersComponent } from './manage-characters/manage-characters.component';
+import { EncounterComponent } from './encounter/encounter.component';
 
 @NgModule({
   declarations: [
@@ -27,17 +29,25 @@ import { SidenavComponent } from './sidenav/sidenav.component';
       PreparationComponent,
       FightComponent,
       AboutComponent,
-      SidenavComponent
+      SidenavComponent,
+      ManageCharactersComponent,
+      EncounterComponent
   ],
   imports: [
       BrowserModule,
       HttpModule,
       RouterModule.forRoot([
           {
-              path: '', component: HomeComponent
+              path: '', component: EncounterComponent
+          },
+          {
+              path: 'encounter', component: EncounterComponent
           },
           {
               path: 'about', component: AboutComponent
+          },
+          {
+              path: 'manage', component: ManageCharactersComponent
           }
     ]),
       MaterialModule

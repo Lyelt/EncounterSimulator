@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material';
+import { SidenavService } from 'src/app/sidenav.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    constructor() { }
+    @ViewChild('sidenav') public sideNav: MatDrawer;
+
+    constructor(private sidenavService: SidenavService) {
+    }
+
+    ngOnInit() {
+        this.sidenavService.sideNav = this.sideNav;
+    }
+
+    toggleSidenav() {
+        this.sidenavService.sideNav.toggle();
+    }
 }

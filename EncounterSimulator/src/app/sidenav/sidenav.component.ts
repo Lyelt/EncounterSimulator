@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SidenavService } from '../sidenav.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -8,9 +9,15 @@ import { Router } from '@angular/router';
 })
 export class SidenavComponent implements OnInit {
 
-    constructor(private router: Router) { }
+    constructor(private router: Router, private sidenavService: SidenavService) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.router.events.subscribe(event => {
+            this.closeSidenav();
+        });
+    }
 
+    closeSidenav() {
+        this.sidenavService.sideNav.close();
+    }
 }
