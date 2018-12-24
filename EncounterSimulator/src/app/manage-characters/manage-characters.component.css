@@ -1,0 +1,23 @@
+
+.mat-sort-header-sorted {
+    color: black;
+}
+
+.character-row:hover {
+    background: #f5f5f5;
+}
+
+.actions {
+    margin-left: .25em;
+    cursor: pointer;
+}
+
+@media(max-width: 800px) {
+    .responsive-table {
+        overflow-x: auto !important;
+    }
+
+    .mat-table {
+        min-width: 800px;
+    }
+}

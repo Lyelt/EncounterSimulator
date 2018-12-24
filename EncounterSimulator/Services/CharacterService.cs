@@ -54,13 +54,14 @@ namespace EncounterSimulator.Services
         ///     Delete a character from the database.
         /// </summary>
         /// <param name="id">ID of the character to delete</param>
+        /// <param name="archive">Whether to archive the character when it is deleted</param>
         /// <returns>The success or failure of the delete operation</returns>
-        public bool DeleteCharacter(int id)
+        public bool DeleteCharacter(int id, bool archive = false)
         {
             try
             {
                 using (var dbc = DatabaseHelper.GetConnector())
-                using (var cmd = dbc.BuildStoredProcedureCommand("spDeleteCharacter", "@id", id))
+                using (var cmd = dbc.BuildStoredProcedureCommand(archive ? "spArchiveCharacter" : "spDeleteCharacter", "@id", id))
                 {
                     cmd.ExecuteNonQuery();
                 }

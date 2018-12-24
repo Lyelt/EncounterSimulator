@@ -10,7 +10,7 @@ namespace EncounterSimulator.Interfaces
     {
         IEnumerable<AvailableCharacter> GetAvailableCharacters();
 
-        bool DeleteCharacter(int id);
+        bool DeleteCharacter(int id, bool archive = false);
 
         bool SaveCharacter(AvailableCharacter character);
 

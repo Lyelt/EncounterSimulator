@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
 import { MaterialModule } from './material/material.module';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -17,6 +17,21 @@ import { AboutComponent } from './about/about.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ManageCharactersComponent } from './manage-characters/manage-characters.component';
 import { EncounterComponent } from './encounter/encounter.component';
+
+const routes: Routes = [
+    {
+        path: '', component: EncounterComponent
+    },
+    {
+        path: 'encounter', component: EncounterComponent
+    },
+    {
+        path: 'about', component: AboutComponent
+    },
+    {
+        path: 'manage', component: ManageCharactersComponent
+    }
+];
 
 @NgModule({
   declarations: [
@@ -36,20 +51,7 @@ import { EncounterComponent } from './encounter/encounter.component';
   imports: [
       BrowserModule,
       HttpModule,
-      RouterModule.forRoot([
-          {
-              path: '', component: EncounterComponent
-          },
-          {
-              path: 'encounter', component: EncounterComponent
-          },
-          {
-              path: 'about', component: AboutComponent
-          },
-          {
-              path: 'manage', component: ManageCharactersComponent
-          }
-    ]),
+      RouterModule.forRoot(routes, {useHash: true}),
       MaterialModule
   ],
   entryComponents: [

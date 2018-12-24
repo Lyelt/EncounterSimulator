@@ -1,3 +1,55 @@
-<p>
-  manage-characters works!
-</p>
+<div class="responsive-table">
+    <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+            <mat-cell *matCellDef="let character">{{character.name}} ({{character.owner == null ? 'NPC' : character.owner}})</mat-cell>
+            <mat-footer-cell *matFooterCellDef>
+                <mat-icon style="cursor: pointer;"
+                          (click)="openDialog()"
+                          matTooltip="Add a new character">add</mat-icon>
+            </mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="maxHP">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Max HP</mat-header-cell>
+            <mat-cell *matCellDef="let character">{{character.maxHP}}</mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="ac">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Armor Class</mat-header-cell>
+            <mat-cell *matCellDef="let character">{{character.ac}}</mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="speed">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Speed</mat-header-cell>
+            <mat-cell *matCellDef="let character">{{character.speed}}</mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="dexModifier">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Dex Modifier</mat-header-cell>
+            <mat-cell *matCellDef="let character">{{character.dexModifier}}</mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>Edit / Delete / Archive</mat-header-cell>
+            <mat-cell *matCellDef="let character">
+                <mat-icon matTooltip="Edit {{character.name}}" class="actions" (click)="openDialog(character)">edit</mat-icon>
+                <mat-icon matTooltip="Delete {{character.name}}" class="actions" (click)="deleteCharacter(character.id)">delete</mat-icon>
+                <mat-icon matTooltip="Archive {{character.name}}" class="actions" (click)="deleteCharacter(character.id, true)">archive</mat-icon>
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columnHeaders"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnHeaders;"
+                 (click)="$event && $event.target.innerHTML != 'delete' && $event.target.innerHTML != 'edit' ? selection.toggle(row) : null"
+                 class="character-row"></mat-row>
+        <mat-footer-row *matFooterRowDef="columnHeaders"></mat-footer-row>
+
+    </mat-table>
+</div>

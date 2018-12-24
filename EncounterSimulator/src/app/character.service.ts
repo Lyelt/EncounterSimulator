@@ -31,4 +31,8 @@ export class CharacterService {
     updateCharacter(character: AvailableCharacter) {
         return this.http.put(this.BASE_URL + 'UpdateCharacter', character);
     }
+
+    archiveCharacter(id: number) {
+        return this.http.delete(this.BASE_URL + 'ArchiveCharacter/' + id);
+    }
 }

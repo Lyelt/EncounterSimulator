@@ -41,6 +41,18 @@ namespace EncounterSimulator.Controllers
                 BadRequest("Error deleting character") as IActionResult;
         }
 
+        [HttpDelete("{id}")]
+        [Route("Character/ArchiveCharacter/{id}")]
+        public IActionResult ArchiveCharacter(int id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return _characterService.DeleteCharacter(id, true) ?
+                Ok() as IActionResult :
+                BadRequest("Error archiving character") as IActionResult;
+        }
+
         [HttpPost]
         [Route("Character/SaveCharacter")]
         public IActionResult SaveCharacter([FromBody]AvailableCharacter character)
