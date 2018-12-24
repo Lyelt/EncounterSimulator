@@ -50,3 +50,11 @@ export class Status {
 
     duration: number;
 }
+
+export class Action {
+    id: number;
+
+    name: string;
+
+    description: string;
+}

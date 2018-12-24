@@ -1,5 +1,10 @@
 <mat-accordion class="example-headers-align">
-    <mat-expansion-panel *ngFor="let character of characters; let i = index" [expanded]="step === i" (opened)="this.step = i;" hideToggle>
+    <div class="container-horizontal">
+        <mat-icon [matBadge]="turnsElapsed" matBadgeColor="accent" matTooltip="{{turnsElapsed}} individual turn(s) elapsed">person</mat-icon>
+        <mat-icon [matBadge]="roundsElapsed" matBadgeColor="accent" matTooltip="{{roundsElapsed}} complete round(s) elapsed">autorenew</mat-icon>
+        <mat-icon [matBadge]="timeElapsed" matBadgeColor="accent" matTooltip="{{timeElapsed}} in-game second(s) elapsed">access_time</mat-icon>
+    </div>
+    <mat-expansion-panel *ngFor="let character of characters; let i = index" [expanded]="step === i" hideToggle> <!--(opened)="this.step = i;"--> 
         <mat-expansion-panel-header>
             <mat-panel-title>
                 <div class="spinner-wrapper">
@@ -17,47 +22,60 @@
                     <mat-icon matTooltip="Armor Class">security</mat-icon>
                     {{character.ac}}
                 </div>
-
-                <div *ngIf="character.dexModifier >= 0">
-                    <mat-icon matTooltip="Dexterity Modifier">directions_run</mat-icon>
-                    +{{character.dexModifier}}
-                </div>
-                <div *ngIf="character.dexModifier < 0">
-                    <mat-icon matTooltip="Dexterity Modifier">directions_run</mat-icon>
-                    {{character.dexModifier}}
-                </div>
             </mat-panel-description>
         </mat-expansion-panel-header>
 
         <div class="container-vertical">
-            <div class="container-horizontal">
-                <mat-form-field>
-                    <mat-select placeholder="Select an action">
-                        <mat-option value="Attack">Attack</mat-option>
-                        <mat-option value="Dash">Dash</mat-option>
-                        <mat-option value="Disengage">Disengage</mat-option>
-                    </mat-select>
-                </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="Select an action">
+                    <mat-option value="Attack">Attack</mat-option>
+                    <mat-option value="Dash">Dash</mat-option>
+                    <mat-option value="Disengage">Disengage</mat-option>
+                </mat-select>
+            </mat-form-field>
 
-                <mat-form-field>
-                    <mat-select placeholder="Select a target">
-                        <mat-option *ngFor="let character of characters" [value]="character.id">{{character.name}}</mat-option>
-                        <mat-option value="-1">Other</mat-option>
-                    </mat-select>
-                </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="Select a target">
+                    <mat-option *ngFor="let character of characters" [value]="character.id">{{character.name}}</mat-option>
+                    <mat-option value="-1">Other</mat-option>
+                </mat-select>
+            </mat-form-field>
 
-                <mat-form-field>
-                    <input matInput type="number" placeholder="Enter a value" />
-                    <mat-hint align="end">damage</mat-hint>
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-form-field style="width: 100%;">
-                    <textarea matInput placeholder="Enter some flavor text"></textarea>
-                </mat-form-field>
-            </div>
+            <mat-form-field>
+                <input matInput type="number" placeholder="Enter a value" />
+                <mat-hint align="end">damage</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-chip-list #statusChipList>
+                    <mat-chip *ngFor="let status of statuses"
+                              color="accent"
+                              selected="true"
+                              removable="true"
+                              (removed)="remove(status)"
+                              matTooltip="{{status.description}}">
+                        {{status.name}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Inflict statuses"
+                           #statusInput
+                           [formControl]="statusCtrl"
+                           [matAutocomplete]="statusAutocomplete"
+                           [matChipInputFor]="statusChipList"
+                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                           (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+                <mat-autocomplete #statusAutocomplete (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let status of filteredStatuses | async" [value]="status.name">
+                        {{status.name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field style="width: 100%;">
+                <textarea matInput placeholder="Enter some flavor text"></textarea>
+            </mat-form-field>
         </div>
-        
 
         <mat-action-row>
             <button mat-raised-button color="accent" (click)="endTurn()">End Turn</button>

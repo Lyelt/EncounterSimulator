@@ -1,4 +1,17 @@
+// Import theming functions
+@import '~@angular/material/theming';
+
 .spinner-wrapper {
     height: 2em;
     width: 2em;
+}
+
+.container-horizontal {
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1em;
+}
+
+.chip {
+
 }
