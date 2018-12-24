@@ -12,7 +12,7 @@ import { CharacterSharingService } from '../character-sharing.service';
 @Component({
   selector: 'app-manage-characters',
   templateUrl: './manage-characters.component.html',
-  styleUrls: ['./manage-characters.component.css']
+  styleUrls: ['./manage-characters.component.scss']
 })
 export class ManageCharactersComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;

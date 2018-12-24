@@ -6,7 +6,7 @@ import { FightComponent } from '../fight/fight.component';
 @Component({
   selector: 'app-encounter',
   templateUrl: './encounter.component.html',
-  styleUrls: ['./encounter.component.css']
+  styleUrls: ['./encounter.component.scss']
 })
 export class EncounterComponent implements OnInit {
 

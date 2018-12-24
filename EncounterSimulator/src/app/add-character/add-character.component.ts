@@ -6,7 +6,7 @@ import { AvailableCharacter } from 'src/models/character';
 @Component({
   selector: 'app-add-character',
   templateUrl: './add-character.component.html',
-  styleUrls: ['./add-character.component.css']
+  styleUrls: ['./add-character.component.scss']
 })
 export class AddCharacterComponent implements OnInit {
     form: FormGroup;

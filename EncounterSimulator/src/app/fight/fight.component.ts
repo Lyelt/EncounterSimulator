@@ -2,16 +2,17 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ENTER } from '@angular/cdk/keycodes';
 import { CharacterSharingService } from 'src/app/character-sharing.service';
-import { AvailableCharacter, ActiveCharacter, Status } from 'src/models/character';
+import { AvailableCharacter, ActiveCharacter, Status, Action } from 'src/models/character';
 import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete } from '@angular/material';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { StatusService } from 'src/app/status.service';
+import { ActionService } from 'src/app/action.service';
 
 @Component({
   selector: 'app-fight',
   templateUrl: './fight.component.html',
-  styleUrls: ['./fight.component.css']
+  styleUrls: ['./fight.component.scss']
 })
 export class FightComponent implements OnInit {
     @ViewChild('statusInput') statusInput: ElementRef<HTMLInputElement>;
@@ -24,6 +25,8 @@ export class FightComponent implements OnInit {
     statuses: Status[] = [];
     allStatuses: Status[] = [];
 
+    actions: Action[] = [];
+
     // * For character turn order
     characters: ActiveCharacter[];
     step = 0;
@@ -31,8 +34,9 @@ export class FightComponent implements OnInit {
     turnsElapsed = 0;
     timeElapsed = 0;
 
-    constructor(private selectedCharService: CharacterSharingService, private statusService: StatusService) {
+    constructor(private selectedCharService: CharacterSharingService, private statusService: StatusService, private actionService: ActionService) {
         this.allStatuses = statusService.getStatuses();
+        this.actions = actionService.getActions();
 
         this.filteredStatuses = this.statusCtrl.valueChanges.pipe(
             startWith(null),
@@ -57,6 +61,10 @@ export class FightComponent implements OnInit {
         }
     }
 
+    addForm() {
+
+    }
+
     // * Methods for handling the status chip list and auto-complete
     // ****
     add(event: MatChipInputEvent): void {
@@ -65,18 +73,7 @@ export class FightComponent implements OnInit {
         if (!this.statusAutocomplete.isOpen) {
             const input = event.input;
             const value = event.value;
-
-            // Add our status
-            if ((value || '').trim()) {
-                this.statuses.push(this.allStatuses.find(s => s.name.toLowerCase() === value.trim().toLowerCase()));
-            }
-
-            // Reset the input value
-            if (input) {
-                input.value = '';
-            }
-
-            this.statusCtrl.setValue(null);
+            this.addStatus(value, input);
         }
     }
 
@@ -89,8 +86,20 @@ export class FightComponent implements OnInit {
     }
 
     selected(event: MatAutocompleteSelectedEvent): void {
-        this.statuses.push(this.allStatuses.find(s => s.name.toLowerCase() === event.option.viewValue.trim().toLowerCase()));
-        this.statusInput.nativeElement.value = '';
+        this.addStatus(event.option.viewValue, this.statusInput.nativeElement);
+    }
+
+    addStatus(value: string, input: HTMLInputElement) {
+        if ((value || '').trim()) {
+            let found = this.allStatuses.find(s => s.name.toLowerCase() === value.trim().toLowerCase());
+            if (found && this.statuses.findIndex(s => s.id === found.id) < 0)
+                this.statuses.push(found);
+        }
+
+        if (input) {
+            input.value = '';
+        }
+
         this.statusCtrl.setValue(null);
     }
 

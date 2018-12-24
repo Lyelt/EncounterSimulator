@@ -27,10 +27,9 @@
 
         <div class="container-vertical">
             <mat-form-field>
+                <mat-icon matPrefix>info</mat-icon>
                 <mat-select placeholder="Select an action">
-                    <mat-option value="Attack">Attack</mat-option>
-                    <mat-option value="Dash">Dash</mat-option>
-                    <mat-option value="Disengage">Disengage</mat-option>
+                    <mat-option *ngFor="let action of actions" [value]="action.id">{{action.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
 
@@ -49,7 +48,7 @@
             <mat-form-field>
                 <mat-chip-list #statusChipList>
                     <mat-chip *ngFor="let status of statuses"
-                              color="accent"
+                              class="chip"
                               selected="true"
                               removable="true"
                               (removed)="remove(status)"
@@ -78,6 +77,8 @@
         </div>
 
         <mat-action-row>
+            <button mat-raised-button color="primary" (click)="addForm()">Another Action</button>
+            <span class="spacer"></span>
             <button mat-raised-button color="accent" (click)="endTurn()">End Turn</button>
         </mat-action-row>
     </mat-expansion-panel>

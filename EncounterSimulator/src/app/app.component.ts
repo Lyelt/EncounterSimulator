@@ -5,7 +5,7 @@ import { SidenavService } from 'src/app/sidenav.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
     @ViewChild('sidenav') public sideNav: MatDrawer;

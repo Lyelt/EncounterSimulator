@@ -1,5 +1,4 @@
-// Import theming functions
-@import '~@angular/material/theming';
+@import 'src/lyelt-theme.scss';
 
 .spinner-wrapper {
     height: 2em;
@@ -13,5 +12,10 @@
 }
 
 .chip {
+    color: white;
+    background-color: $accent;
+}
 
+.spacer {
+    flex: 1 1 auto;
 }

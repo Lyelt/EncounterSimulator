@@ -12,7 +12,7 @@ import { CharacterSharingService } from '../character-sharing.service';
 @Component({
   selector: 'app-available-characters',
   templateUrl: './available-characters.component.html',
-  styleUrls: ['./available-characters.component.css']
+  styleUrls: ['./available-characters.component.scss']
 })
     
 export class AvailableCharactersComponent implements OnInit {

@@ -6,7 +6,7 @@ import { UtilsService } from '../utils.service';
 @Component({
   selector: 'app-preparation',
   templateUrl: './preparation.component.html',
-  styleUrls: ['./preparation.component.css']
+  styleUrls: ['./preparation.component.scss']
 })
 
 export class PreparationComponent implements OnInit {
