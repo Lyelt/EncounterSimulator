@@ -51,5 +51,6 @@ Did you almost die? Did you deal a ton of damage? You can keep track of all your
 - [ ] Enter other preliminary fields for the encounter such as location and time of day
 - [ ] Show statistics from the fight after it is over
 - [ ] Log all turns and encounters, and allow management and viewing of the logs
+- [ ] Implement all possible Monster Manual monsters as default options
 - [ ] Implement authentication and management of account as either a player or DM
 - [ ] Implement live viewing of encounter from a player's perspective
