@@ -1,4 +1,5 @@
-# EncounterSimulator ![Lyelt](../master/EncounterSimulator/src/assets/lyelt-logo-sm.png)
+![Lyelt](../master/EncounterSimulator/src/assets/lyelt-logo-sm.png)
+# EncounterSimulator
 Simulator for creating D&amp;D encounters and tracking information during play. Written using .NET Core + Web API + Angular 6
 
 ## Features
