@@ -1,27 +1,35 @@
-# EncounterSimulator
+# EncounterSimulator ![Lyelt](https://github.com/Lyelt/EncounterSimulator/tree/master/EncounterSimulator/src/assets/lyelt-logo.png "Lyelt")
 Simulator for creating D&amp;D encounters and tracking information during play. Written using .NET Core + Web API + Angular 6
 
 ## Features
 
-**Manage your characters:** Whether you're the Dungeon Master or a player, simply log in and create a character with some basic information to be used during the encounter. If you need to track some monsters, there is a comprehensive list of all 5E monsters that are found in the monster manual. Choose one, and all of the relevant combat statistics will be populated for you.
+#### Manage your characters
+Whether you're the Dungeon Master or a player, simply log in and create a character with some basic information to be used during the encounter. If you need to track some monsters, there is a comprehensive list of all 5E monsters that are found in the monster manual. Choose one, and all of the relevant combat statistics will be populated for you.
 
-**Review an encounter:** Perhaps you're reliving a previous session's encounter, or you just need to remember what happened in that last fight. You can easily review the battle as an overview or turn-by-turn to recall exactly what happened.
+#### Review an encounter 
+Perhaps you're reliving a previous session's encounter, or you just need to remember what happened in that last fight. You can easily review the battle as an overview or turn-by-turn to recall exactly what happened.
 
-### Dungeon Masters
+## For Dungeon Masters
 
-**Select your combatants:** From your list of configured characters, you can select all of the monsters and players that will be taking part in this encounter.
+#### Select your combatants 
+From your list of configured characters, you can select all of the monsters and players that will be taking part in this encounter.
 
-**Roll initiative:** Enter your manually-rolled initiative, or roll it automatically using each character's provided dexterity modifier.
+#### Roll initiative
+Enter your manually-rolled initiative, or roll it automatically using each character's provided dexterity modifier.
 
-**Fight!** Track your monsters' and players' initiative order, combat actions, statuses, and combat statistics in a way that helps visualize exactly what is happening in combat. Never miss a turn or forget a saving throw again!
+#### Fight!
+Track your monsters' and players' initiative order, combat actions, statuses, and combat statistics in a way that helps visualize exactly what is happening in combat. Never miss a turn or forget a saving throw again!
 
-**Review battle statistics:** Look at all of the combat statistics for a given battle or character to help balance and fine-tune your encounters for next time.
+#### Review battle statistics
+Look at all of the combat statistics for a given battle or character to help balance and fine-tune your encounters for next time.
 
-### Players
+## For Players
 
-**Enter the battle:** See exactly what your DM is seeing as each round progresses. You'll have a live view of the encounter and you can see each player's turn unravel. Plan exactly what you want to do on your next turn, or view your party's health and statuses in real time so you can prioritize exactly what you need to do next!
+#### Enter the battle
+See exactly what your DM is seeing as each round progresses. You'll have a live view of the encounter and you can see each player's turn unravel. Plan exactly what you want to do on your next turn, or view your party's health and statuses in real time so you can prioritize exactly what you need to do next!
 
-**View your character's statistics:** Did you almost die? Did you deal a ton of damage? You can keep track of all your character's statistics from a given battle or across their entire career. 
+#### View your character's statistics
+Did you almost die? Did you deal a ton of damage? You can keep track of all your character's statistics from a given battle or across their entire career. 
 
 ## TODO
 
