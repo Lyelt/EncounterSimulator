@@ -50,6 +50,9 @@ table {
 
 .container {
     display: flex;
+    max-width: 1012px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .container-vertical {

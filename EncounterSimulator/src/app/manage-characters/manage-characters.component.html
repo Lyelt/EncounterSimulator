@@ -1,12 +1,12 @@
-<div class="responsive-table">
-    <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+<div class="container container-vertical">
+    <h1>Manage Characters</h1>
+    <mat-table [dataSource]="availableCharacterSource" matSort class="mat-elevation-z8">
 
         <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
             <mat-cell *matCellDef="let character">{{character.name}} ({{character.owner == null ? 'NPC' : character.owner}})</mat-cell>
             <mat-footer-cell *matFooterCellDef>
-                <mat-icon style="cursor: pointer;"
-                          (click)="openDialog()"
+                <mat-icon (click)="openDialog()"
                           matTooltip="Add a new character">add</mat-icon>
             </mat-footer-cell>
         </ng-container>
@@ -45,11 +45,32 @@
             <mat-footer-cell *matFooterCellDef></mat-footer-cell>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="columnHeaders"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: columnHeaders;"
-                 (click)="$event && $event.target.innerHTML != 'delete' && $event.target.innerHTML != 'edit' ? selection.toggle(row) : null"
+        <mat-header-row *matHeaderRowDef="availableCharacterHeaders"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: availableCharacterHeaders;"
                  class="character-row"></mat-row>
-        <mat-footer-row *matFooterRowDef="columnHeaders"></mat-footer-row>
+        <mat-footer-row *matFooterRowDef="availableCharacterHeaders"></mat-footer-row>
+
+    </mat-table>
+
+    <div>
+        <button mat-raised-button color="warn" class="show-btn" (click)="showArchived = !showArchived">Show Archived Characters</button>
+    </div>
+
+    <mat-table *ngIf="showArchived" [dataSource]="archivedCharacterSource" matSort class="mat-elevation-z8">
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Archived Characters</mat-header-cell>
+            <mat-cell *matCellDef="let character">
+                <mat-icon matTooltip="Delete {{character.name}} Forever" class="actions" (click)="deleteForever(character.id)">delete_forever</mat-icon>
+                <mat-icon matTooltip="Restore {{character.name}}" class="actions" (click)="restore(character.id)">unarchive</mat-icon>
+                  {{character.name}}
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="archivedCharacterHeaders"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: archivedCharacterHeaders;" class="character-row"></mat-row>
+        <mat-footer-row *matFooterRowDef="archivedCharacterHeaders"></mat-footer-row>
 
     </mat-table>
 </div>

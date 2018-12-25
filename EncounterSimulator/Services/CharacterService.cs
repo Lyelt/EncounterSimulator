@@ -26,14 +26,14 @@ namespace EncounterSimulator.Services
         ///     Retrieve the characters which are "available" for use in an encounter.
         /// </summary>
         /// <returns>List of available characters</returns>
-        public IEnumerable<AvailableCharacter> GetAvailableCharacters()
+        public IEnumerable<AvailableCharacter> GetAvailableCharacters(bool getArchived = false)
         {
             var availableCharacters = new List<AvailableCharacter>();
 
             try
             {
                 using (var dbc = DatabaseHelper.GetConnector())
-                using (var cmd = dbc.BuildStoredProcedureCommand("spGetAvailableCharacters"))
+                using (var cmd = dbc.BuildStoredProcedureCommand(getArchived ? "spGetArchivedCharacters" : "spGetAvailableCharacters"))
                 using (var rdr = cmd.ExecuteReader())
                 {
                     while (rdr.Read())
@@ -56,12 +56,12 @@ namespace EncounterSimulator.Services
         /// <param name="id">ID of the character to delete</param>
         /// <param name="archive">Whether to archive the character when it is deleted</param>
         /// <returns>The success or failure of the delete operation</returns>
-        public bool DeleteCharacter(int id, bool archive = false)
+        public bool DeleteCharacter(int id, bool archive = false, bool deleteForever = false)
         {
             try
             {
                 using (var dbc = DatabaseHelper.GetConnector())
-                using (var cmd = dbc.BuildStoredProcedureCommand(archive ? "spArchiveCharacter" : "spDeleteCharacter", "@id", id))
+                using (var cmd = dbc.BuildStoredProcedureCommand(archive ? deleteForever ? "spDeleteForever" : "spArchiveCharacter" : "spDeleteCharacter", "@id", id))
                 {
                     cmd.ExecuteNonQuery();
                 }
@@ -109,6 +109,30 @@ namespace EncounterSimulator.Services
         public bool UpdateCharacter(AvailableCharacter character)
         {
             return UpsertCharacter(character, true);
+        }
+
+        /// <summary>
+        ///     Restore a character from the archive
+        /// </summary>
+        /// <param name="id">Character ID to restore</param>
+        /// <returns>The success or failure of the restore operation</returns>
+        public bool RestoreCharacter(int id)
+        {
+            try
+            {
+                using (var dbc = DatabaseHelper.GetConnector())
+                using (var cmd = dbc.BuildStoredProcedureCommand("spRestoreCharacter", "@id", id))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex);
+                return false;
+            }
+
+            return true;
         }
 
         private bool UpsertCharacter(AvailableCharacter character, bool update)

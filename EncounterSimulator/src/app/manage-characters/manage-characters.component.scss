@@ -9,15 +9,13 @@
 
 .actions {
     margin-left: .25em;
-    cursor: pointer;
 }
 
-@media(max-width: 800px) {
-    .responsive-table {
-        overflow-x: auto !important;
-    }
+mat-table {
+    width: 100%;
+}
 
-    .mat-table {
-        min-width: 800px;
-    }
+.show-btn {
+    margin-top: 2em;
+    margin-bottom: 2em;
 }

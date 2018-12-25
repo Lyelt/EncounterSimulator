@@ -16,12 +16,17 @@ import { CharacterSharingService } from '../character-sharing.service';
 })
 export class ManageCharactersComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
-    dataSource: MatTableDataSource<AvailableCharacter>;
+    availableCharacterSource: MatTableDataSource<AvailableCharacter>;
     availableCharacters: AvailableCharacter[];
-    columnHeaders = ['name', 'maxHP', 'ac', 'speed', 'dexModifier', 'actions'];
-    selection = new SelectionModel<AvailableCharacter>(true, []);
+    availableCharacterHeaders = ['name', 'maxHP', 'ac', 'speed', 'dexModifier', 'actions'];
 
-    constructor(private charService: CharacterService, private selectedCharService: CharacterSharingService, private dialog: MatDialog) {
+    archivedCharacterSource: MatTableDataSource<AvailableCharacter>;
+    archivedCharacters: AvailableCharacter[];
+    archivedCharacterHeaders = ['name'];
+
+    showArchived = false;
+
+    constructor(private charService: CharacterService, private dialog: MatDialog) {
         this.refreshData();
     }
 
@@ -31,17 +36,33 @@ export class ManageCharactersComponent implements OnInit {
 
     refreshData() {
         this.availableCharacters = [];
-        this.charService.getAvailableCharacters().subscribe(result => {
-            for (let character of result.json()) {
-                this.availableCharacters.push(character);
-            }
-        },
+        this.archivedCharacters = [];
+
+        this.charService.getAvailableCharacters().subscribe(
+            result => {
+                for (let character of result.json()) {
+                    this.availableCharacters.push(character);
+                }
+            },
             error => {
                 console.error(error);
             },
             () => {
-                this.dataSource = new MatTableDataSource(this.availableCharacters);
-                this.dataSource.sort = this.sort;
+                this.availableCharacterSource = new MatTableDataSource(this.availableCharacters);
+                this.availableCharacterSource.sort = this.sort;
+            });
+
+        this.charService.getArchivedCharacters().subscribe(
+            result => {
+                for (let character of result.json()) {
+                    this.archivedCharacters.push(character);
+                }
+            },
+            error => {
+                console.error(error);
+            },
+            () => {
+                this.archivedCharacterSource = new MatTableDataSource(this.archivedCharacters);
             });
     }
 
@@ -95,6 +116,28 @@ export class ManageCharactersComponent implements OnInit {
     deleteCharacter(id, archive = false) {
         let request = archive ? this.charService.archiveCharacter(id) : this.charService.deleteCharacter(id);
         request.subscribe(
+            result => { },
+            error => {
+                console.error(error);
+            },
+            () => {
+                this.refreshData();
+            });
+    }
+
+    deleteForever(id) {
+        this.charService.deleteForever(id).subscribe(
+            result => { },
+            error => {
+                console.error(error);
+            },
+            () => {
+                this.refreshData();
+            });
+    }
+
+    restore(id) {
+        this.charService.restoreCharacter(id).subscribe(
             result => { },
             error => {
                 console.error(error);

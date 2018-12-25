@@ -29,6 +29,16 @@ namespace EncounterSimulator.Controllers
             return Ok(_characterService.GetAvailableCharacters());
         }
 
+        [HttpGet]
+        [Route("Character/GetArchivedCharacters")]
+        public IActionResult GetArchivedCharacters()
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(_characterService.GetAvailableCharacters(getArchived: true));
+        }
+
         [HttpDelete("{id}")]
         [Route("Character/DeleteCharacter/{id}")]
         public IActionResult DeleteCharacter(int id)
@@ -51,6 +61,18 @@ namespace EncounterSimulator.Controllers
             return _characterService.DeleteCharacter(id, true) ?
                 Ok() as IActionResult :
                 BadRequest("Error archiving character") as IActionResult;
+        }
+
+        [HttpDelete("{id}")]
+        [Route("Character/DeleteForever/{id}")]
+        public IActionResult DeleteForever(int id)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return _characterService.DeleteCharacter(id, true, true) ?
+                Ok() as IActionResult :
+                BadRequest("Error deleting character") as IActionResult;
         }
 
         [HttpPost]
@@ -78,6 +100,15 @@ namespace EncounterSimulator.Controllers
             return _characterService.UpdateCharacter(character) ?
                 Ok() as IActionResult :
                 BadRequest("Error updating character") as IActionResult;
+        }
+
+        [HttpDelete("{id}")]
+        [Route("Character/RestoreCharacter/{id}")]
+        public IActionResult RestoreCharacter(int id)
+        {
+            return _characterService.RestoreCharacter(id) ?
+                Ok() as IActionResult :
+                BadRequest("Error restoring character") as IActionResult;
         }
     }
 }

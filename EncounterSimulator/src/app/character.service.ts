@@ -16,6 +16,10 @@ export class CharacterService {
         return this.http.get(this.BASE_URL + 'GetAvailableCharacters');
     }
 
+    getArchivedCharacters() {
+        return this.http.get(this.BASE_URL + 'GetArchivedCharacters');
+    }
+
     deleteCharacter(id: number) {
         return this.http.delete(this.BASE_URL + 'DeleteCharacter/' + id);
     }
@@ -34,5 +38,13 @@ export class CharacterService {
 
     archiveCharacter(id: number) {
         return this.http.delete(this.BASE_URL + 'ArchiveCharacter/' + id);
+    }
+
+    deleteForever(id: number) {
+        return this.http.delete(this.BASE_URL + 'DeleteForever/' + id);
+    }
+
+    restoreCharacter(id: number) {
+        return this.http.delete(this.BASE_URL + 'RestoreCharacter/' + id);
     }
 }
