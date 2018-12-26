@@ -18,11 +18,11 @@ export class ManageCharactersComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
     availableCharacterSource: MatTableDataSource<AvailableCharacter>;
     availableCharacters: AvailableCharacter[];
-    availableCharacterHeaders = ['name', 'maxHP', 'ac', 'speed', 'dexModifier', 'actions'];
+    availableCharacterHeaders = ['actions', 'name', 'maxHP', 'ac', 'speed', 'dexModifier'];
 
     archivedCharacterSource: MatTableDataSource<AvailableCharacter>;
     archivedCharacters: AvailableCharacter[];
-    archivedCharacterHeaders = ['name'];
+    archivedCharacterHeaders = ['actions', 'name'];
 
     showArchived = false;
 
