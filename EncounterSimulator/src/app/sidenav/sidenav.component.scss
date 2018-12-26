@@ -1,3 +1,5 @@
+@import 'src/lyelt-theme.scss';
+
 .logo {
     max-height: 3em;
 }
@@ -17,4 +19,9 @@
     background-color: white;
     display: flex;
     flex-direction: column;
+}
+
+.active {
+    text-decoration: underline !important;
+    text-decoration-color: $primary !important;
 }

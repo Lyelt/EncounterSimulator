@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatDrawer } from '@angular/material';
+import { MatSidenav } from '@angular/material';
 import { SidenavService } from 'src/app/sidenav.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { SidenavService } from 'src/app/sidenav.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    @ViewChild('sidenav') public sideNav: MatDrawer;
+    @ViewChild('sidenav') public sideNav: MatSidenav;
 
     constructor(private sidenavService: SidenavService) {
     }
