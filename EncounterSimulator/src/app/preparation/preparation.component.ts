@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AvailableCharacter } from 'src/models/character';
-import { CharacterSharingService } from '../character-sharing.service';
-import { UtilsService } from '../utils.service';
+import { CharacterSharingService } from '../services/character-sharing.service';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
   selector: 'app-preparation',

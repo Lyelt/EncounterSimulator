@@ -12,11 +12,12 @@ import { AvailableCharactersComponent } from './available-characters/available-c
 import { AddCharacterComponent } from './add-character/add-character.component';
 import { PreparationComponent } from './preparation/preparation.component';
 import { FightComponent } from './fight/fight.component';
-import { CharacterSharingService } from './character-sharing.service';
+import { CharacterSharingService } from './services/character-sharing.service';
 import { AboutComponent } from './about/about.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ManageCharactersComponent } from './manage-characters/manage-characters.component';
 import { EncounterComponent } from './encounter/encounter.component';
+import { HideShowPipe } from './pipes/hide-show.pipe';
 
 const routes: Routes = [
     {
@@ -46,7 +47,8 @@ const routes: Routes = [
       AboutComponent,
       SidenavComponent,
       ManageCharactersComponent,
-      EncounterComponent
+      EncounterComponent,
+      HideShowPipe
   ],
   imports: [
       BrowserModule,

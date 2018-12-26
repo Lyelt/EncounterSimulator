@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ENTER } from '@angular/cdk/keycodes';
-import { CharacterSharingService } from 'src/app/character-sharing.service';
+import { CharacterSharingService } from 'src/app/services/character-sharing.service';
 import { AvailableCharacter, ActiveCharacter, Status, Action } from 'src/models/character';
 import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete } from '@angular/material';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { StatusService } from 'src/app/status.service';
-import { ActionService } from 'src/app/action.service';
+import { StatusService } from 'src/app/services/status.service';
+import { ActionService } from 'src/app/services/action.service';
 
 @Component({
   selector: 'app-fight',

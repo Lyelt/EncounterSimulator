@@ -5,9 +5,9 @@ import { DataSource } from '@angular/cdk/collections';
 import { MatSort, MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AddCharacterComponent } from '../add-character/add-character.component';
-import { CharacterService } from '../character.service';
+import { CharacterService } from '../services/character.service';
 import { AvailableCharacter } from 'src/models/character';
-import { CharacterSharingService } from '../character-sharing.service';
+import { CharacterSharingService } from '../services/character-sharing.service';
 
 @Component({
   selector: 'app-available-characters',

@@ -57,14 +57,13 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="availableCharacterHeaders"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: availableCharacterHeaders;"
-                 class="character-row"></mat-row>
+        <mat-row *matRowDef="let row; columns: availableCharacterHeaders;" class="character-row"></mat-row>
         <mat-footer-row *matFooterRowDef="availableCharacterHeaders"></mat-footer-row>
 
     </mat-table>
 
     <div>
-        <button mat-raised-button color="warn" class="show-btn" (click)="showArchived = !showArchived">Show Archived Characters</button>
+        <button mat-raised-button color="warn" class="show-btn" (click)="showArchived = !showArchived">{{showArchived | hideShow}} Archived Characters</button>
     </div>
 
     <mat-table *ngIf="showArchived" [dataSource]="archivedCharacterSource" matSort class="mat-elevation-z8">
