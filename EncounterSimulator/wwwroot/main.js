@@ -553,7 +553,7 @@ __webpack_require__.r(__webpack_exports__);
  * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride,checkTypes}
  * tslint:disable
  */ 
-var styles = ["mat-sidenav-content[_ngcontent-%COMP%] {\n  padding: .75em; }"];
+var styles = ["mat-sidenav-content[_ngcontent-%COMP%] {\n  padding: .75em;\n  overflow: hidden; }\nmat-sidenav[_ngcontent-%COMP%] {\n  border-right: .25px solid; }"];
 
 
 
@@ -2765,7 +2765,7 @@ __webpack_require__.r(__webpack_exports__);
  * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride,checkTypes}
  * tslint:disable
  */ 
-var styles = [".logo[_ngcontent-%COMP%] {\n  max-height: 3em; }\n.spacer[_ngcontent-%COMP%] {\n  flex: 1 1 auto; }\n.nav-item[_ngcontent-%COMP%] {\n  padding: 1em 2em 0 2em;\n  color: #808080;\n  -webkit-text-decoration-line: none;\n          text-decoration-line: none;\n  font-size: 1.5em; }\n.sidenav-bar[_ngcontent-%COMP%] {\n  background-color: white;\n  display: flex;\n  flex-direction: column; }\n.active[_ngcontent-%COMP%] {\n  text-decoration: underline !important;\n  -webkit-text-decoration-color: #3f51b5 !important;\n          text-decoration-color: #3f51b5 !important; }"];
+var styles = [".logo[_ngcontent-%COMP%] {\n  max-height: 3em; }\n.spacer[_ngcontent-%COMP%] {\n  flex: 1 1 auto; }\n.nav-item[_ngcontent-%COMP%] {\n  padding: 1em 1.5em 0 .5em;\n  color: #808080;\n  -webkit-text-decoration-line: none;\n          text-decoration-line: none;\n  font-size: 1.5em; }\n.sidenav-bar[_ngcontent-%COMP%] {\n  background-color: white;\n  display: flex;\n  flex-direction: column; }\n.active[_ngcontent-%COMP%] {\n  text-decoration: underline !important;\n  -webkit-text-decoration-color: #3f51b5 !important;\n          text-decoration-color: #3f51b5 !important; }"];
 
 
 
