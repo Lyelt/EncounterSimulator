@@ -18,6 +18,9 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { ManageCharactersComponent } from './manage-characters/manage-characters.component';
 import { EncounterComponent } from './encounter/encounter.component';
 import { HideShowPipe } from './pipes/hide-show.pipe';
+import { GameOptionsComponent } from './game-options/game-options.component';
+import { ReviewComponent } from './review/review.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 const routes: Routes = [
     {
@@ -31,6 +34,15 @@ const routes: Routes = [
     },
     {
         path: 'manage', component: ManageCharactersComponent
+    },
+    {
+        path: 'options', component: GameOptionsComponent
+    },
+    {
+        path: 'review', component: ReviewComponent
+    },
+    {
+        path: 'statistics', component: StatisticsComponent
     }
 ];
 
@@ -48,7 +60,10 @@ const routes: Routes = [
       SidenavComponent,
       ManageCharactersComponent,
       EncounterComponent,
-      HideShowPipe
+      HideShowPipe,
+      GameOptionsComponent,
+      ReviewComponent,
+      StatisticsComponent
   ],
   imports: [
       BrowserModule,
