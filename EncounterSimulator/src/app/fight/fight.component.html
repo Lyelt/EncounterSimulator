@@ -4,7 +4,7 @@
         <mat-icon [matBadge]="roundsElapsed" matBadgeColor="accent" matTooltip="{{roundsElapsed}} complete round(s) elapsed">autorenew</mat-icon>
         <mat-icon [matBadge]="timeElapsed" matBadgeColor="accent" matTooltip="{{timeElapsed}} in-game second(s) elapsed">access_time</mat-icon>
     </div>
-    <mat-expansion-panel *ngFor="let character of characters; let i = index" [expanded]="step === i" hideToggle> <!--(opened)="this.step = i;"--> 
+    <mat-expansion-panel *ngFor="let character of characters; let i = index" [expanded]="step === i" hideToggle>
         <mat-expansion-panel-header>
             <mat-panel-title>
                 <div class="spinner-wrapper">
@@ -27,7 +27,6 @@
 
         <div class="container-vertical">
             <mat-form-field>
-                <mat-icon matPrefix>info</mat-icon>
                 <mat-select placeholder="Select an action">
                     <mat-option *ngFor="let action of actions" [value]="action.id">{{action.name}}</mat-option>
                 </mat-select>
@@ -42,7 +41,7 @@
 
             <mat-form-field>
                 <input matInput type="number" placeholder="Enter a value" />
-                <mat-hint align="end">damage</mat-hint>
+                <mat-hint align="end">hint</mat-hint>
             </mat-form-field>
 
             <mat-form-field>
@@ -77,7 +76,7 @@
         </div>
 
         <mat-action-row>
-            <button mat-raised-button color="primary" (click)="addForm()">Another Action</button>
+            <button mat-raised-button color="primary" (click)="saveAction()">Another Action</button>
             <span class="spacer"></span>
             <button mat-raised-button color="accent" (click)="endTurn()">End Turn</button>
         </mat-action-row>

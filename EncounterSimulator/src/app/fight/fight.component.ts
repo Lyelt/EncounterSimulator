@@ -2,12 +2,14 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ENTER } from '@angular/cdk/keycodes';
 import { CharacterSharingService } from 'src/app/services/character-sharing.service';
-import { AvailableCharacter, ActiveCharacter, Status, Action } from 'src/models/character';
+import { AvailableCharacter, ActiveCharacter } from 'src/models/character';
+import { Status, ActionType } from 'src/models/game';
 import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete } from '@angular/material';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { StatusService } from 'src/app/services/status.service';
-import { ActionService } from 'src/app/services/action.service';
+import { GameService } from 'src/app/services/game.service';
+import { EncounterService } from 'src/app/encounter.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-fight',
@@ -18,6 +20,8 @@ export class FightComponent implements OnInit {
     @ViewChild('statusInput') statusInput: ElementRef<HTMLInputElement>;
     @ViewChild('statusAutocomplete') statusAutocomplete: MatAutocomplete;
 
+    encounterId: number;
+
     // * For status autocomplete and chiplist
     separatorKeysCodes: number[] = [ENTER];
     statusCtrl = new FormControl();
@@ -25,7 +29,8 @@ export class FightComponent implements OnInit {
     statuses: Status[] = [];
     allStatuses: Status[] = [];
 
-    actions: Action[] = [];
+    actions: ActionType[] = [];
+    actionForm: FormGroup;
 
     // * For character turn order
     characters: ActiveCharacter[];
@@ -34,9 +39,13 @@ export class FightComponent implements OnInit {
     turnsElapsed = 0;
     timeElapsed = 0;
 
-    constructor(private selectedCharService: CharacterSharingService, private statusService: StatusService, private actionService: ActionService) {
-        this.allStatuses = statusService.getStatuses();
-        this.actions = actionService.getActions();
+    constructor(private fb: FormBuilder,
+                private selectedCharService: CharacterSharingService,
+                private gameService: GameService,
+                private encounterService: EncounterService) {
+
+        this.initializeStatuses();
+        this.initializeActionTypes();
 
         this.filteredStatuses = this.statusCtrl.valueChanges.pipe(
             startWith(null),
@@ -46,11 +55,35 @@ export class FightComponent implements OnInit {
     ngOnInit() {
     }
 
+    initializeStatuses() {
+        this.gameService.getAllStatuses().subscribe(result => {
+            for (let status of result.json()) {
+                this.allStatuses.push(status);
+            }
+        },
+            error => {
+                console.error(error);
+            });
+    }
+
+    initializeActionTypes() {
+        this.gameService.getAllActionTypes().subscribe(result => {
+                for (let actionType of result.json()) {
+                    this.actions.push(actionType);
+                }
+            },
+            error => {
+                console.error(error);
+            });
+    }
+
     initializeCharacters() {
         this.characters = this.selectedCharService.getSelectedAsActive();
+        this.encounterService.startEncounter(this.characters);
     }
 
     endTurn() {
+
         this.step++;
         this.turnsElapsed++;
 
@@ -61,8 +94,8 @@ export class FightComponent implements OnInit {
         }
     }
 
-    addForm() {
-
+    saveAction() {
+        
     }
 
     // * Methods for handling the status chip list and auto-complete

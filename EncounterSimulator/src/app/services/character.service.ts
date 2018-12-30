@@ -20,10 +20,6 @@ export class CharacterService {
         return this.http.get(this.BASE_URL + 'GetArchivedCharacters');
     }
 
-    deleteCharacter(id: number) {
-        return this.http.delete(this.BASE_URL + 'DeleteCharacter/' + id);
-    }
-
     saveCharacter(character: AvailableCharacter) {
         return this.http.post(this.BASE_URL + 'SaveCharacter', character);
     }
@@ -34,6 +30,10 @@ export class CharacterService {
 
     updateCharacter(character: AvailableCharacter) {
         return this.http.put(this.BASE_URL + 'UpdateCharacter', character);
+    }
+
+    deleteCharacter(id: number) {
+        return this.http.delete(this.BASE_URL + 'DeleteCharacter/' + id);
     }
 
     archiveCharacter(id: number) {

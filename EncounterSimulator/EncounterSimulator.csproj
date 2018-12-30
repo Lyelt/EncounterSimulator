@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <None Remove="src\models\character.ts" />
+    <None Remove="src\models\encounter.ts" />
+    <None Remove="src\models\game.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,7 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="src\models\encounter.ts" />
     <TypeScriptCompile Include="src\models\character.ts" />
+    <TypeScriptCompile Include="src\models\game.ts" />
   </ItemGroup>
 
 </Project>

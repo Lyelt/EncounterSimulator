@@ -13,7 +13,8 @@ export class PreparationComponent implements OnInit {
     characters: AvailableCharacter[];
 
 
-    constructor(private selectedCharService: CharacterSharingService, private utilService: UtilsService) {
+    constructor(private selectedCharService: CharacterSharingService,
+                private utilService: UtilsService) {
     }
 
     ngOnInit() {

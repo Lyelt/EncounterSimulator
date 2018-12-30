@@ -13,6 +13,8 @@ namespace EncounterSimulator.Services
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services.AddTransient<ICharacterService, CharacterService>();
+            services.AddTransient<IGameService, GameService>();
+            services.AddTransient<IEncounterService, EncounterService>();
             services.AddScoped<ILoggerService, LoggerService>();
             return services;
         }

@@ -1,4 +1,6 @@
-﻿export class AvailableCharacter {
+﻿import { Status } from "./game";
+
+export class AvailableCharacter {
     id: number;
 
     name: string;
@@ -39,22 +41,4 @@ export class ActiveCharacter extends AvailableCharacter {
         this.statuses = [];
         this.currentHP = this.maxHP;
     }
-}
-
-export class Status {
-    id: number;
-
-    name: string;
-
-    description: string;
-
-    duration: number;
-}
-
-export class Action {
-    id: number;
-
-    name: string;
-
-    description: string;
 }

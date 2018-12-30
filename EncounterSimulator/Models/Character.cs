@@ -26,15 +26,35 @@ namespace EncounterSimulator.Models
         public static AvailableCharacter Create(SqlDataReader reader)
         {
             return new AvailableCharacter
-            {
-                Id = reader.GetInt("Id"),
-                Name = reader.GetString("Name"),
-                MaxHP = reader.GetInt("MaxHP"),
-                AC = reader.GetInt("AC"),
-                Speed = reader.GetInt("Speed"),
-                Owner = reader.GetString("Owner"),
-                DexModifier = reader.GetInt("DexModifier")
-            };
+            (
+                reader.GetInt("Id"),
+                reader.GetString("Name"),
+                reader.GetInt("MaxHP"),
+                reader.GetInt("AC"),
+                reader.GetInt("Speed"),
+                reader.GetString("Owner"),
+                reader.GetInt("DexModifier")
+            );
         }
+
+        protected AvailableCharacter(int id, string name, int maxHP, int ac, int speed, string owner, int dexMod)
+        {
+            Id = id;
+            Name = name;
+            MaxHP = maxHP;
+            AC = ac;
+            Speed = speed;
+            Owner = owner;
+            DexModifier = dexMod;
+        }
+
+        protected AvailableCharacter() { }
+    }
+
+    public class ActiveCharacter : AvailableCharacter
+    {
+        public List<Status> Statuses { get; set; }
+
+        public int CurrentHP { get; set; }
     }
 }
