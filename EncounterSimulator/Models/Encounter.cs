@@ -5,9 +5,15 @@ using System.Threading.Tasks;
 
 namespace EncounterSimulator.Models
 {
-    public class Encounter
+    public class EncounterData
     {
         public int Id { get; set; } 
+
+        public List<ActiveCharacter> Characters { get; set; }
+
+        public TimeOfDay TimeOfEncounter { get; set; }
+
+        public string Description { get; set; }
     }
 
     public class Action
@@ -23,5 +29,15 @@ namespace EncounterSimulator.Models
         public List<Status> InflictedStatuses { get; set; }
 
         public string FlavorText { get; set; }
+    }
+
+    public enum TimeOfDay
+    {
+        Dawn,
+        Morning,
+        Afternoon,
+        Evening,
+        Dusk,
+        Night
     }
 }

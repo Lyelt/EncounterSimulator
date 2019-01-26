@@ -24,14 +24,16 @@ namespace EncounterSimulator.Services
         /// </summary>
         /// <param name="characters"></param>
         /// <returns></returns>
-        public int StartEncounter(List<ActiveCharacter> characters)
+        public int StartEncounter(EncounterData encounter)
         {
+            int encounterId = 0;
+
             try
             {
                 using (var dbc = DatabaseHelper.GetConnector())
-                using (var cmd = dbc.BuildStoredProcedureCommand("spStartEncounter")) // TODO: Add parameters
+                using (var cmd = dbc.BuildStoredProcedureCommand("spStartEncounter", "@timeOfDay", encounter.TimeOfEncounter, "@description", encounter.Description))
                 {
-                    //return (int)cmd.ExecuteScalar();
+                    encounterId = (int)cmd.ExecuteScalar(); // returns the ID of the encounter
                 }
             }
             catch (Exception ex)
@@ -39,7 +41,7 @@ namespace EncounterSimulator.Services
                 _log.Error(ex);
             }
 
-            return 0;
+            return encounterId;
         }
 
         /// <summary>

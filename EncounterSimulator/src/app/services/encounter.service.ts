@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActiveCharacter } from '../models/character';
-import { Action } from '../models/encounter';
+import { ActiveCharacter } from 'src/models/character';
+import { Action } from 'src/models/encounter';
 
 @Injectable({
   providedIn: 'root'

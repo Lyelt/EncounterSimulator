@@ -8,7 +8,7 @@ import { MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete } from
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { GameService } from 'src/app/services/game.service';
-import { EncounterService } from 'src/app/encounter.service';
+import { EncounterService } from 'src/app/services/encounter.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({

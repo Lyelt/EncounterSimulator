@@ -8,7 +8,7 @@ namespace EncounterSimulator.Interfaces
 {
     public interface IEncounterService
     {
-        int StartEncounter(List<ActiveCharacter> characters);
+        int StartEncounter(EncounterData encounter);
 
         bool SaveAction(Models.Action action);
     }

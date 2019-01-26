@@ -20,9 +20,9 @@ namespace EncounterSimulator.Controllers
 
         [HttpPost]
         [Route("Encounter/StartEncounter")]
-        public IActionResult StartEncounter(List<ActiveCharacter> characters)
+        public IActionResult StartEncounter(EncounterData encounter)
         {
-            int encounterId = _encounterService.StartEncounter(characters);
+            int encounterId = _encounterService.StartEncounter(encounter);
             return encounterId > 0 ?
                 Ok(encounterId) as IActionResult :
                 BadRequest() as IActionResult;
