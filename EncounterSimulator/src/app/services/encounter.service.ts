@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { ActiveCharacter } from 'src/models/character';
-import { Action } from 'src/models/encounter';
+import { Action, EncounterData } from 'src/models/encounter';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +10,8 @@ export class EncounterService {
 
     constructor(private http: Http) { }
 
-    startEncounter(characters: ActiveCharacter[]) {
-        return this.http.post(this.BASE_URL + 'StartEncounter', characters);
+    startEncounter(data: EncounterData) {
+        return this.http.post(this.BASE_URL + 'StartEncounter', data);
     }
 
     saveAction(action: Action) {

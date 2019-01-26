@@ -1545,6 +1545,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var src_app_services_game_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/game.service */ "./src/app/services/game.service.ts");
 /* harmony import */ var src_app_services_encounter_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/services/encounter.service */ "./src/app/services/encounter.service.ts");
+/* harmony import */ var _models_encounter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../models/encounter */ "./src/models/encounter.ts");
+
 
 
 
@@ -1578,6 +1580,7 @@ var FightComponent = /** @class */ (function () {
     }
     FightComponent.prototype.ngOnInit = function () {
     };
+    // Get all of the 
     FightComponent.prototype.initializeStatuses = function () {
         var _this = this;
         this.gameService.getAllStatuses().subscribe(function (result) {
@@ -1600,11 +1603,21 @@ var FightComponent = /** @class */ (function () {
             console.error(error);
         });
     };
+    // Get all of the user-selected characters and encounter info to begin
     FightComponent.prototype.initializeCharacters = function () {
         this.characters = this.selectedCharService.getSelectedAsActive();
-        this.encounterService.startEncounter(this.characters);
+        var data = new _models_encounter__WEBPACK_IMPORTED_MODULE_9__["EncounterData"]();
+        data.characters = this.characters;
+        data.description = "This is a description of the encounter";
+        data.timeOfEncounter = _models_encounter__WEBPACK_IMPORTED_MODULE_9__["TimeOfDay"].Dawn;
+        this.encounterService.startEncounter(data).subscribe(function (result) {
+            data.id = result.json();
+        });
+        this.encounterData = data;
     };
+    // Save the current action and move to the next character's turn
     FightComponent.prototype.endTurn = function () {
+        this.saveAction();
         this.step++;
         this.turnsElapsed++;
         if (this.step == this.characters.length) {
@@ -1613,7 +1626,17 @@ var FightComponent = /** @class */ (function () {
             this.timeElapsed += 6;
         }
     };
+    // Save the current action to the server using the currently-entered form data
     FightComponent.prototype.saveAction = function () {
+        this.encounterService.saveAction(this.getCurrentAction());
+        this.resetForm();
+    };
+    // Clear the values of all the relevant form controls for this action
+    FightComponent.prototype.resetForm = function () {
+    };
+    FightComponent.prototype.getCurrentAction = function () {
+        var action = new _models_encounter__WEBPACK_IMPORTED_MODULE_9__["Action"]();
+        return action;
     };
     // * Methods for handling the status chip list and auto-complete
     // ****
@@ -2815,8 +2838,8 @@ var EncounterService = /** @class */ (function () {
         this.http = http;
         this.BASE_URL = 'Encounter/';
     }
-    EncounterService.prototype.startEncounter = function (characters) {
-        return this.http.post(this.BASE_URL + 'StartEncounter', characters);
+    EncounterService.prototype.startEncounter = function (data) {
+        return this.http.post(this.BASE_URL + 'StartEncounter', data);
     };
     EncounterService.prototype.saveAction = function (action) {
         return this.http.post(this.BASE_URL + 'SaveAction', action);
@@ -3215,6 +3238,44 @@ var ActiveCharacter = /** @class */ (function (_super) {
     return ActiveCharacter;
 }(AvailableCharacter));
 
+
+
+/***/ }),
+
+/***/ "./src/models/encounter.ts":
+/*!*********************************!*\
+  !*** ./src/models/encounter.ts ***!
+  \*********************************/
+/*! exports provided: EncounterData, Action, TimeOfDay */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EncounterData", function() { return EncounterData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Action", function() { return Action; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimeOfDay", function() { return TimeOfDay; });
+var EncounterData = /** @class */ (function () {
+    function EncounterData() {
+    }
+    return EncounterData;
+}());
+
+// Describes one action that a character can take on their turn
+var Action = /** @class */ (function () {
+    function Action() {
+    }
+    return Action;
+}());
+
+var TimeOfDay;
+(function (TimeOfDay) {
+    TimeOfDay[TimeOfDay["Dawn"] = 0] = "Dawn";
+    TimeOfDay[TimeOfDay["Morning"] = 1] = "Morning";
+    TimeOfDay[TimeOfDay["Afternoon"] = 2] = "Afternoon";
+    TimeOfDay[TimeOfDay["Evening"] = 3] = "Evening";
+    TimeOfDay[TimeOfDay["Dusk"] = 4] = "Dusk";
+    TimeOfDay[TimeOfDay["Night"] = 5] = "Night";
+})(TimeOfDay || (TimeOfDay = {}));
 
 
 /***/ }),

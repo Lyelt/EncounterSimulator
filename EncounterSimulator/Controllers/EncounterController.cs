@@ -20,7 +20,7 @@ namespace EncounterSimulator.Controllers
 
         [HttpPost]
         [Route("Encounter/StartEncounter")]
-        public IActionResult StartEncounter(EncounterData encounter)
+        public IActionResult StartEncounter([FromBody]EncounterData encounter)
         {
             int encounterId = _encounterService.StartEncounter(encounter);
             return encounterId > 0 ?

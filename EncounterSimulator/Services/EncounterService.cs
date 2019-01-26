@@ -20,7 +20,7 @@ namespace EncounterSimulator.Services
         }
 
         /// <summary>
-        /// 
+        ///     Begin the encounter with the provided encounter data
         /// </summary>
         /// <param name="characters"></param>
         /// <returns></returns>
@@ -31,9 +31,13 @@ namespace EncounterSimulator.Services
             try
             {
                 using (var dbc = DatabaseHelper.GetConnector())
-                using (var cmd = dbc.BuildStoredProcedureCommand("spStartEncounter", "@timeOfDay", encounter.TimeOfEncounter, "@description", encounter.Description))
                 {
-                    encounterId = (int)cmd.ExecuteScalar(); // returns the ID of the encounter
+                    using (var cmd = dbc.BuildStoredProcedureCommand("spStartEncounter", "@timeOfDay", encounter.TimeOfEncounter, "@description", encounter.Description))
+                        encounterId = (int)cmd.ExecuteScalar(); // returns the ID of the encounter
+
+                    foreach (var character in encounter.Characters)
+                        using (var cmd = dbc.BuildStoredProcedureCommand("spAddCharacterToEncounter", "@encounterId", encounterId, "@characterId", character.Id))
+                            cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)

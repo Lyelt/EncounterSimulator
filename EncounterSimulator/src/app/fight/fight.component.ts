@@ -10,6 +10,7 @@ import { map, startWith } from 'rxjs/operators';
 import { GameService } from 'src/app/services/game.service';
 import { EncounterService } from 'src/app/services/encounter.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Action, EncounterData, TimeOfDay } from '../../models/encounter';
 
 @Component({
   selector: 'app-fight',
@@ -19,8 +20,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FightComponent implements OnInit {
     @ViewChild('statusInput') statusInput: ElementRef<HTMLInputElement>;
     @ViewChild('statusAutocomplete') statusAutocomplete: MatAutocomplete;
-
-    encounterId: number;
+    
+    encounterData: EncounterData;
 
     // * For status autocomplete and chiplist
     separatorKeysCodes: number[] = [ENTER];
@@ -55,6 +56,7 @@ export class FightComponent implements OnInit {
     ngOnInit() {
     }
 
+    // Get all of the 
     initializeStatuses() {
         this.gameService.getAllStatuses().subscribe(result => {
             for (let status of result.json()) {
@@ -77,12 +79,23 @@ export class FightComponent implements OnInit {
             });
     }
 
+    // Get all of the user-selected characters and encounter info to begin
     initializeCharacters() {
         this.characters = this.selectedCharService.getSelectedAsActive();
-        this.encounterService.startEncounter(this.characters);
+
+        let data: EncounterData = new EncounterData();
+        data.characters = this.characters;
+        data.description = "This is a description of the encounter";
+        data.timeOfEncounter = TimeOfDay.Dawn;
+        this.encounterService.startEncounter(data).subscribe(result => {
+            data.id = result.json();
+        });
+        this.encounterData = data;
     }
 
-    endTurn() {
+    // Save the current action and move to the next character's turn
+    endTurn(): void {
+        this.saveAction();
 
         this.step++;
         this.turnsElapsed++;
@@ -94,8 +107,20 @@ export class FightComponent implements OnInit {
         }
     }
 
-    saveAction() {
+    // Save the current action to the server using the currently-entered form data
+    saveAction(): void {
+        this.encounterService.saveAction(this.getCurrentAction());
+        this.resetForm();
+    }
+
+    // Clear the values of all the relevant form controls for this action
+    resetForm(): void {
+    }
+
+    getCurrentAction(): Action {
+        let action: Action = new Action();
         
+        return action;
     }
 
     // * Methods for handling the status chip list and auto-complete
