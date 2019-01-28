@@ -30,7 +30,7 @@ namespace EncounterSimulator.Controllers
 
         [HttpPost]
         [Route("Encounter/SaveAction")]
-        public IActionResult SaveAction(Models.Action action)
+        public IActionResult SaveAction([FromBody]Models.Action action)
         {
             return _encounterService.SaveAction(action) ?
                 Ok() as IActionResult :

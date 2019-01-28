@@ -17,64 +17,13 @@
                     <mat-icon matTooltip="Current HP / Max HP">favorite_border</mat-icon>
                     {{character.currentHP}} / {{character.maxHP}}
                 </div>
-
                 <div>
                     <mat-icon matTooltip="Armor Class">security</mat-icon>
                     {{character.ac}}
                 </div>
             </mat-panel-description>
         </mat-expansion-panel-header>
-
-        <div class="container-vertical">
-            <mat-form-field>
-                <mat-select placeholder="Select an action">
-                    <mat-option *ngFor="let action of actions" [value]="action.id">{{action.name}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-select placeholder="Select a target">
-                    <mat-option *ngFor="let character of characters" [value]="character.id">{{character.name}}</mat-option>
-                    <mat-option value="-1">Other</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <mat-form-field>
-                <input matInput type="number" placeholder="Enter a value" />
-                <mat-hint align="end">hint</mat-hint>
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-chip-list #statusChipList>
-                    <mat-chip *ngFor="let status of statuses"
-                              class="chip"
-                              selected="true"
-                              removable="true"
-                              (removed)="remove(status)"
-                              matTooltip="{{status.description}}">
-                        {{status.name}}
-                        <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
-                    <input placeholder="Inflict statuses"
-                           #statusInput
-                           [formControl]="statusCtrl"
-                           [matAutocomplete]="statusAutocomplete"
-                           [matChipInputFor]="statusChipList"
-                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                           (matChipInputTokenEnd)="add($event)">
-                </mat-chip-list>
-                <mat-autocomplete #statusAutocomplete (optionSelected)="selected($event)">
-                    <mat-option *ngFor="let status of filteredStatuses | async" [value]="status.name">
-                        {{status.name}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-
-            <mat-form-field style="width: 100%;">
-                <textarea matInput placeholder="Enter some flavor text"></textarea>
-            </mat-form-field>
-        </div>
-
+        <app-action #actionForms [character]="character"></app-action>
         <mat-action-row>
             <button mat-raised-button color="primary" (click)="saveAction()">Another Action</button>
             <span class="spacer"></span>

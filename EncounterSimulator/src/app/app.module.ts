@@ -21,6 +21,7 @@ import { HideShowPipe } from './pipes/hide-show.pipe';
 import { GameOptionsComponent } from './game-options/game-options.component';
 import { ReviewComponent } from './review/review.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { ActionComponent } from './action/action.component';
 
 const routes: Routes = [
     {
@@ -63,7 +64,8 @@ const routes: Routes = [
       HideShowPipe,
       GameOptionsComponent,
       ReviewComponent,
-      StatisticsComponent
+      StatisticsComponent,
+      ActionComponent
   ],
   imports: [
       BrowserModule,
