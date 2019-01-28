@@ -57,10 +57,21 @@ namespace EncounterSimulator.Services
         {
             try
             {
+                int actionId = 0;
                 using (var dbc = DatabaseHelper.GetConnector())
-                using (var cmd = dbc.BuildStoredProcedureCommand("spSaveAction")) // TODO: Add parameters
                 {
-                    cmd.ExecuteNonQuery();
+                    using (var cmd = dbc.BuildStoredProcedureCommand("spSaveAction", 
+                        "@characterId", action.CharacterId, 
+                        "@targetCharacterId", action.TargetCharacterId, 
+                        "@actionTypeId", action.ActionType.Id,
+                        "@value", action.Value,
+                        "@flavorText", action.FlavorText))
+                        actionId = (int)cmd.ExecuteScalar();
+
+                    foreach (var status in action.InflictedStatuses)
+                        using (var cmd = dbc.BuildStoredProcedureCommand("spAddStatusToAction", "@actionId", actionId, "@statusId", status.Id))
+                            cmd.ExecuteNonQuery();
+
                 }
             }
             catch (Exception ex)

@@ -11,7 +11,8 @@ import { ActionComponent } from '../action/action.component';
   styleUrls: ['./fight.component.scss']
 })
 export class FightComponent implements OnInit {
-    @ViewChildren("actionForms") actionForms: QueryList<ActionComponent>;
+    @ViewChildren("actionForms") actionFormQuery: QueryList<ActionComponent>;
+    actionForms: ActionComponent[] = [];
     encounterData: EncounterData;
 
     // * For character turn order
@@ -41,11 +42,21 @@ export class FightComponent implements OnInit {
             data.id = result.json();
         });
         this.encounterData = data;
+
+        let firstCharacterId = this.characters[0].id;
+        this.actionFormQuery.changes.subscribe(query => query.forEach(f => {
+            this.actionForms.push(f);
+            if (f.characterId == firstCharacterId) {
+                f.enable();
+            }
+        }));
     }
 
     // Save the current action and move to the next character's turn
     endTurn(): void {
         this.saveAction();
+        this.actionForms[this.step].disable();
+        this.resetForm();
 
         this.step++;
         this.turnsElapsed++;
@@ -55,22 +66,23 @@ export class FightComponent implements OnInit {
             this.roundsElapsed++;
             this.timeElapsed += 6;
         }
+
+        this.actionForms[this.step].enable();
     }
 
     // Save the current action to the server using the currently-entered form data
     saveAction(): void {
-        this.encounterService.saveAction(this.getCurrentAction());
+        this.encounterService.saveAction(this.getCurrentAction()).subscribe();
         this.resetForm();
     }
 
     // Clear the values of all the relevant form controls for this action
     resetForm(): void {
+        this.actionForms[this.step].reset();
     }
 
     getCurrentAction(): Action {
-        let action: Action = new Action();
-        
-        return action;
+        return this.actionForms[this.step].getAction();
     }
 
 }
