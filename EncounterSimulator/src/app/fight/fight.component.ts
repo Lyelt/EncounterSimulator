@@ -72,7 +72,9 @@ export class FightComponent implements OnInit {
 
     // Save the current action to the server using the currently-entered form data
     saveAction(): void {
-        this.encounterService.saveAction(this.getCurrentAction()).subscribe();
+        let action: Action = this.getCurrentAction();
+        action.encounterId = this.encounterData.id;
+        this.encounterService.saveAction(action).subscribe(() => { }, error => alert(error));
         this.resetForm();
     }
 

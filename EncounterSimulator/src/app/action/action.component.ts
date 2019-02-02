@@ -62,8 +62,8 @@ export class ActionComponent implements OnInit {
         action.characterId = this.character.id;
         action.actionType = this.form.get("actionType").value;
         action.flavorText = this.form.get("flavor").value;
-        action.targetCharacterId = this.form.get("target").value;
-        action.value = this.form.get("value").value;
+        action.targetCharacterId = this.form.get("target").value == null ? 0 : this.form.get("target").value;
+        action.value = this.form.get("value").value == null ? 0 : this.form.get("value").value;
         //action.inflictedStatuses = this.form.get("statuses").value;
         action.inflictedStatuses = [];
         return action;

@@ -29,6 +29,8 @@ namespace EncounterSimulator.Models
         public List<Status> InflictedStatuses { get; set; }
 
         public string FlavorText { get; set; }
+
+        public int EncounterId { get; set; }
     }
 
     public enum TimeOfDay

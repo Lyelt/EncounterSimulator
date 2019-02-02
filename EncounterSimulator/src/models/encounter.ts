@@ -17,6 +17,8 @@ export class Action {
 
     targetCharacterId: number;
 
+    encounterId: number;
+
     actionType: ActionType;
 
     value: number;

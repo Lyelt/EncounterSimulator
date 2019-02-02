@@ -61,7 +61,8 @@ namespace EncounterSimulator.Services
                 using (var dbc = DatabaseHelper.GetConnector())
                 {
                     using (var cmd = dbc.BuildStoredProcedureCommand("spSaveAction", 
-                        "@characterId", action.CharacterId, 
+                        "@characterId", action.CharacterId,
+                        "@encounterId", action.EncounterId,
                         "@targetCharacterId", action.TargetCharacterId, 
                         "@actionTypeId", action.ActionType.Id,
                         "@value", action.Value,

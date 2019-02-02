@@ -459,8 +459,8 @@ var ActionComponent = /** @class */ (function () {
         action.characterId = this.character.id;
         action.actionType = this.form.get("actionType").value;
         action.flavorText = this.form.get("flavor").value;
-        action.targetCharacterId = this.form.get("target").value;
-        action.value = this.form.get("value").value;
+        action.targetCharacterId = this.form.get("target").value == null ? 0 : this.form.get("target").value;
+        action.value = this.form.get("value").value == null ? 0 : this.form.get("value").value;
         //action.inflictedStatuses = this.form.get("statuses").value;
         action.inflictedStatuses = [];
         return action;
@@ -1833,7 +1833,9 @@ var FightComponent = /** @class */ (function () {
     };
     // Save the current action to the server using the currently-entered form data
     FightComponent.prototype.saveAction = function () {
-        this.encounterService.saveAction(this.getCurrentAction()).subscribe();
+        var action = this.getCurrentAction();
+        action.encounterId = this.encounterData.id;
+        this.encounterService.saveAction(action).subscribe();
         this.resetForm();
     };
     // Clear the values of all the relevant form controls for this action
@@ -3490,7 +3492,7 @@ var TimeOfDay;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Workspace\EncounterSimulator\EncounterSimulator\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! c:\Workspace\EncounterSimulator\EncounterSimulator\src\main.ts */"./src/main.ts");
 
 
 /***/ })
