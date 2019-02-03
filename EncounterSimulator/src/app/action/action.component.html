@@ -6,7 +6,7 @@
     </mat-form-field>
 
     <mat-form-field>
-        <mat-select placeholder="Select a target" formControlName="target">
+        <mat-select placeholder="Select a target" formControlName="target" [(ngModel)]="characterId">
             <mat-option *ngFor="let character of characters" [value]="character.id">{{character.name}}</mat-option>
             <mat-option value="-1">Other</mat-option>
         </mat-select>

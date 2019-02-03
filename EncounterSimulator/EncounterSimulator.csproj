@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <TypeScriptToolsVersion>2.9.2</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.2</TypeScriptToolsVersion>
     <TypeScriptCompilerBlocked>true</TypeScriptCompilerBlocked>
     <PostBuildEvent>ng build --aot</PostBuildEvent>
     <UserSecretsId>1ca97cf9-235d-4ba6-b72b-8ff1727097d7</UserSecretsId>
