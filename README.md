@@ -41,17 +41,18 @@ Did you almost die? Did you deal a ton of damage? You can keep track of all your
 - [x] Show an indicator for whose turn it currently is
 - [x] Display the number of turns, rounds, and in-game seconds that have elapsed in the current fight
 - [x] In a given action, enter the type of action, target, and value (e.g. damage or health) along with any inflicted statuses and flavor text
-- [ ] Implement all possible combat actions and character statuses with descriptions
+- [x] Implement all possible combat actions and character statuses with descriptions
 - [ ] Allow management of these actions and statuses, including add/delete custom ones
-- [ ] Allow multiple actions to be entered per turn
+- [x] Allow multiple actions to be entered per turn
 - [ ] Show character statuses on turn overview
 - [ ] Track health automatically based on damage and healing during the encounter
-- [ ] Disable all forms except the current player's turn
+- [x] Disable all forms except the current player's turn
 - [ ] Import character sheets from another source (perhaps dndbeyond pdf sheets)
 - [ ] Allow source URL or image to be entered for a given character sheet
 - [ ] Enter other preliminary fields for the encounter such as location and time of day
 - [ ] Show statistics from the fight after it is over
-- [ ] Log all turns and encounters, and allow management and viewing of the logs
+- [x] Log all turns and encounters
+- [ ] Allow management and viewing of the logs
 - [ ] Implement all possible Monster Manual monsters as default options
 - [ ] Implement authentication and management of account as either a player or DM
 - [ ] Implement live viewing of encounter from a player's perspective
