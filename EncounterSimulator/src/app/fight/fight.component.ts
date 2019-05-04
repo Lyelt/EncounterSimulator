@@ -87,4 +87,11 @@ export class FightComponent implements OnInit {
         return this.actionForms[this.step].getAction();
     }
 
+    saveAndEnd(): void {
+        this.encounterService.saveAndEnd(this.encounterData.id).subscribe(() => { }, error => alert(error));
+    }
+
+    end(): void {
+        this.encounterService.end(this.encounterData.id).subscribe(() => { }, error => alert(error));
+    }
 }

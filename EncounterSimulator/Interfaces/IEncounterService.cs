@@ -11,5 +11,7 @@ namespace EncounterSimulator.Interfaces
         int StartEncounter(EncounterData encounter);
 
         bool SaveAction(Models.Action action);
+
+        void EndEncounter(EncounterData encounter, bool saveEncounter);
     }
 }

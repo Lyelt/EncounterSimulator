@@ -36,5 +36,27 @@ namespace EncounterSimulator.Controllers
                 Ok() as IActionResult :
                 BadRequest() as IActionResult;
         }
+
+        [HttpPost]
+        [Route("Encounter/SaveAndEndEncounter")]
+        public IActionResult SaveAndEndEncounter([FromBody]EncounterData encounter)
+        {
+            if (!ModelState.IsValid || encounter == null)
+                return BadRequest();
+
+            _encounterService.EndEncounter(encounter, true);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("Encounter/EndEncounter")]
+        public IActionResult EndEncounter([FromBody]EncounterData encounter)
+        {
+            if (!ModelState.IsValid || encounter == null)
+                return BadRequest();
+
+            _encounterService.EndEncounter(encounter, false);
+            return Ok();
+        }
     }
 }

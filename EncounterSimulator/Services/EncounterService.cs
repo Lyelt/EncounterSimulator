@@ -83,5 +83,10 @@ namespace EncounterSimulator.Services
 
             return true;
         }
+
+        public void EndEncounter(EncounterData encounter, bool saveEncounter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

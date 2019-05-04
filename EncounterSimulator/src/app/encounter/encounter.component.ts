@@ -25,13 +25,24 @@ export class EncounterComponent implements OnInit {
         this.prep.refreshSelectedCharacters();
     }
 
-    beginFight() {
+    beginEncounter() {
         this.prep.refreshSelectedCharacters();
         this.fight.initializeCharacters();
     }
 
-    restartFight() {
-        this.chars.restart();
+    endEncounter() {
+        this.fight.end();
+        this.restart();
     }
 
+    restart() {
+        this.chars.restart();
+        this.prep.refreshSelectedCharacters();
+        this.fight.initializeCharacters();
+    }
+
+    saveAndEndEncounter() {
+        this.fight.saveAndEnd();
+        this.restart();
+    }
 }

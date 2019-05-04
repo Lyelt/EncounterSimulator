@@ -17,4 +17,12 @@ export class EncounterService {
     saveAction(action: Action) {
         return this.http.post(this.BASE_URL + 'SaveAction', action);
     }
+
+    saveAndEnd(encounterId: number) {
+        return this.http.post(this.BASE_URL + 'SaveAndEndEncounter', encounterId);
+    }
+
+    end(encounterId: number) {
+        return this.http.post(this.BASE_URL + 'EndEncounter', encounterId);
+    }
 }

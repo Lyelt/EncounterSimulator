@@ -15,16 +15,18 @@
             <app-preparation></app-preparation>
             <div>
                 <button color="primary" mat-raised-button class="step" matStepperPrevious>Back</button>
-                <button color="warn" mat-raised-button class="step" matStepperNext (click)="beginFight()">Begin fight!</button>
+                <button color="warn" mat-raised-button class="step" matStepperNext (click)="beginEncounter()">Begin fight!</button>
             </div>
         </mat-step>
 
         <mat-step>
             <ng-template matStepLabel><div (click)="beginFight()">Fight!</div></ng-template>
             <app-fight></app-fight>
-            <div>
+            <div class="footer-row">
                 <button mat-raised-button matStepperPrevious class="step" color="primary">Back</button>
-                <button mat-raised-button (click)="stepper.reset(); restartFight();" color="warn">Start Over</button>
+                <button mat-raised-button (click)="stepper.reset(); endEncounter();" class="step" color="primary">Start Over</button>
+                <span class="spacer"></span>
+                <button mat-raised-button (click)="saveAndEndEncounter();" class="step" color="warn">End Fight</button>
             </div>
         </mat-step>
 
