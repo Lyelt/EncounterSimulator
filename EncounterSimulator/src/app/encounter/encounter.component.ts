@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AvailableCharactersComponent } from '../available-characters/available-characters.component';
 import { PreparationComponent } from '../preparation/preparation.component';
 import { FightComponent } from '../fight/fight.component';
+import { TimeOfDay } from '../../models/encounter';
 
 @Component({
   selector: 'app-encounter',
@@ -27,7 +28,7 @@ export class EncounterComponent implements OnInit {
 
     beginEncounter() {
         this.prep.refreshSelectedCharacters();
-        this.fight.initializeCharacters();
+        this.fight.initializeCharacters("", TimeOfDay.Dawn);
     }
 
     endEncounter() {
@@ -38,7 +39,6 @@ export class EncounterComponent implements OnInit {
     restart() {
         this.chars.restart();
         this.prep.refreshSelectedCharacters();
-        this.fight.initializeCharacters();
     }
 
     saveAndEndEncounter() {

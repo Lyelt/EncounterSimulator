@@ -38,7 +38,16 @@ namespace EncounterSimulator.Services
                 {
                     while (rdr.Read())
                     {
-                        availableCharacters.Add(AvailableCharacter.Create(rdr));
+                        availableCharacters.Add(new AvailableCharacter
+                        (
+                            rdr.GetInt("Id"),
+                            rdr.GetString("Name"),
+                            rdr.GetInt("MaxHP"),
+                            rdr.GetInt("AC"),
+                            rdr.GetInt("Speed"),
+                            rdr.GetString("Owner"),
+                            rdr.GetInt("DexModifier")
+                        ));
                     }
                 }
             }

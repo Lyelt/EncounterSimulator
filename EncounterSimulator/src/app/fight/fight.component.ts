@@ -18,9 +18,6 @@ export class FightComponent implements OnInit {
     // * For character turn order
     characters: ActiveCharacter[];
     step = 0;
-    roundsElapsed = 0;
-    turnsElapsed = 0;
-    timeElapsed = 0;
 
     constructor(private selectedCharService: CharacterSharingService,
                 private encounterService: EncounterService) {
@@ -31,13 +28,13 @@ export class FightComponent implements OnInit {
     }
 
     // Get all of the user-selected characters and encounter info to begin
-    initializeCharacters() {
+    initializeCharacters(description: string, timeOfDay: TimeOfDay) {
         this.characters = this.selectedCharService.getSelectedAsActive();
 
         let data: EncounterData = new EncounterData();
         data.characters = this.characters;
-        data.description = "This is a description of the encounter";
-        data.timeOfEncounter = TimeOfDay.Dawn;
+        data.description = description;
+        data.timeOfEncounter = timeOfDay;
         this.encounterService.startEncounter(data).subscribe(result => {
             data.id = result.json();
         });
@@ -59,12 +56,12 @@ export class FightComponent implements OnInit {
         this.resetForm();
 
         this.step++;
-        this.turnsElapsed++;
+        this.encounterData.turnsElapsed++;
 
         if (this.step == this.characters.length) {
             this.step = 0;
-            this.roundsElapsed++;
-            this.timeElapsed += 6;
+            this.encounterData.roundsElapsed++;
+            this.encounterData.secondsElapsed += 6;
         }
 
         this.actionForms[this.step].enable();
@@ -88,10 +85,10 @@ export class FightComponent implements OnInit {
     }
 
     saveAndEnd(): void {
-        this.encounterService.saveAndEnd(this.encounterData.id).subscribe(() => { }, error => alert(error));
+        this.encounterService.saveAndEnd(this.encounterData).subscribe(() => { }, error => alert(error));
     }
 
     end(): void {
-        this.encounterService.end(this.encounterData.id).subscribe(() => { }, error => alert(error));
+        this.encounterService.end(this.encounterData).subscribe(() => { }, error => alert(error));
     }
 }

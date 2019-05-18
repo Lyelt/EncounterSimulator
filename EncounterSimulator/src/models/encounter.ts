@@ -9,6 +9,16 @@ export class EncounterData {
     timeOfEncounter: TimeOfDay;
 
     description: string;
+
+    roundsElapsed: number = 0;
+
+    turnsElapsed: number = 0;
+
+    secondsElapsed: number = 0;
+
+    startTime: Date;
+
+    endTime: Date;
 }
 
 // Describes one action that a character can take on their turn

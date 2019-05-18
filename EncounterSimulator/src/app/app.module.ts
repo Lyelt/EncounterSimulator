@@ -22,6 +22,7 @@ import { GameOptionsComponent } from './game-options/game-options.component';
 import { ReviewComponent } from './review/review.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ActionComponent } from './action/action.component';
+import { EncounterDetailComponent } from './encounter-detail/encounter-detail.component';
 
 const routes: Routes = [
     {
@@ -65,7 +66,8 @@ const routes: Routes = [
       GameOptionsComponent,
       ReviewComponent,
       StatisticsComponent,
-      ActionComponent
+      ActionComponent,
+      EncounterDetailComponent
   ],
   imports: [
       BrowserModule,

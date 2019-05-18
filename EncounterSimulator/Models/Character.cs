@@ -23,21 +23,7 @@ namespace EncounterSimulator.Models
 
         public int DexModifier { get; set; }
 
-        public static AvailableCharacter Create(SqlDataReader reader)
-        {
-            return new AvailableCharacter
-            (
-                reader.GetInt("Id"),
-                reader.GetString("Name"),
-                reader.GetInt("MaxHP"),
-                reader.GetInt("AC"),
-                reader.GetInt("Speed"),
-                reader.GetString("Owner"),
-                reader.GetInt("DexModifier")
-            );
-        }
-
-        protected AvailableCharacter(int id, string name, int maxHP, int ac, int speed, string owner, int dexMod)
+        public AvailableCharacter(int id, string name, int maxHP, int ac, int speed, string owner, int dexMod)
         {
             Id = id;
             Name = name;
@@ -48,7 +34,7 @@ namespace EncounterSimulator.Models
             DexModifier = dexMod;
         }
 
-        protected AvailableCharacter() { }
+        public AvailableCharacter() { }
     }
 
     public class ActiveCharacter : AvailableCharacter

@@ -24,9 +24,9 @@
             <app-fight></app-fight>
             <div class="footer-row">
                 <button mat-raised-button matStepperPrevious class="step" color="primary">Back</button>
-                <button mat-raised-button (click)="stepper.reset(); endEncounter();" class="step" color="primary">Start Over</button>
+                <button mat-raised-button (click)="endEncounter(); stepper.reset();" class="step" color="primary">Start Over</button>
                 <span class="spacer"></span>
-                <button mat-raised-button (click)="saveAndEndEncounter();" class="step" color="warn">End Fight</button>
+                <button mat-raised-button (click)="saveAndEndEncounter(); stepper.reset();" class="step" color="warn">End Fight</button>
             </div>
         </mat-step>
 

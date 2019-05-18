@@ -1,8 +1,8 @@
 <mat-accordion class="example-headers-align">
     <div class="container-horizontal">
-        <mat-icon [matBadge]="turnsElapsed" matBadgeColor="accent" matTooltip="{{turnsElapsed}} individual turn(s) elapsed">person</mat-icon>
-        <mat-icon [matBadge]="roundsElapsed" matBadgeColor="accent" matTooltip="{{roundsElapsed}} complete round(s) elapsed">autorenew</mat-icon>
-        <mat-icon [matBadge]="timeElapsed" matBadgeColor="accent" matTooltip="{{timeElapsed}} in-game second(s) elapsed">access_time</mat-icon>
+        <mat-icon [matBadge]="encounterData?.turnsElapsed" matBadgeColor="accent" matTooltip="{{encounterData?.turnsElapsed}} individual turn(s) elapsed">person</mat-icon>
+        <mat-icon [matBadge]="encounterData?.roundsElapsed" matBadgeColor="accent" matTooltip="{{encounterData?.roundsElapsed}} complete round(s) elapsed">autorenew</mat-icon>
+        <mat-icon [matBadge]="encounterData?.secondsElapsed" matBadgeColor="accent" matTooltip="{{encounterData?.secondsElapsed}} in-game second(s) elapsed">access_time</mat-icon>
     </div>
     <mat-expansion-panel *ngFor="let character of characters; let i = index" [expanded]="step === i" hideToggle>
         <mat-expansion-panel-header>

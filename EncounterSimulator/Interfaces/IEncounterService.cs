@@ -8,6 +8,8 @@ namespace EncounterSimulator.Interfaces
 {
     public interface IEncounterService
     {
+        IEnumerable<EncounterData> GetEncounters();
+
         int StartEncounter(EncounterData encounter);
 
         bool SaveAction(Models.Action action);

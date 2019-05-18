@@ -10,6 +10,18 @@ export class EncounterService {
 
     constructor(private http: Http) { }
 
+    getEncounters() {
+        return this.http.get(this.BASE_URL + 'GetEncounters');
+    }
+
+    deleteEncounter(id: number) {
+        return this.http.delete(this.BASE_URL + 'DeleteEncounter/' + id);
+    }
+
+    generateReport(id: number) {
+        return this.http.get(this.BASE_URL + 'GenerateReport' + id);
+    }
+
     startEncounter(data: EncounterData) {
         return this.http.post(this.BASE_URL + 'StartEncounter', data);
     }
@@ -18,11 +30,11 @@ export class EncounterService {
         return this.http.post(this.BASE_URL + 'SaveAction', action);
     }
 
-    saveAndEnd(encounterId: number) {
-        return this.http.post(this.BASE_URL + 'SaveAndEndEncounter', encounterId);
+    saveAndEnd(encounter: EncounterData) {
+        return this.http.post(this.BASE_URL + 'SaveAndEndEncounter', encounter);
     }
 
-    end(encounterId: number) {
-        return this.http.post(this.BASE_URL + 'EndEncounter', encounterId);
+    end(encounter: EncounterData) {
+        return this.http.post(this.BASE_URL + 'EndEncounter', encounter);
     }
 }

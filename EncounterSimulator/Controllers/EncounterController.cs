@@ -18,6 +18,16 @@ namespace EncounterSimulator.Controllers
             _encounterService = encounterService;
         }
 
+        [HttpGet]
+        [Route("Encounter/GetEncounters")]
+        public IActionResult GetEncounters()
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(_encounterService.GetEncounters());
+        }
+
         [HttpPost]
         [Route("Encounter/StartEncounter")]
         public IActionResult StartEncounter([FromBody]EncounterData encounter)

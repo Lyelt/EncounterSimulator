@@ -14,6 +14,30 @@ namespace EncounterSimulator.Models
         public TimeOfDay TimeOfEncounter { get; set; }
 
         public string Description { get; set; }
+
+        public int TurnsElapsed { get; set; }
+
+        public int RoundsElapsed { get; set; }
+
+        public int SecondsElapsed { get; set; }
+
+        public DateTime StartTime { get; set; }
+
+        public DateTime EndTime { get; set; }
+
+        public EncounterData() { }
+
+        public EncounterData(int id, TimeOfDay timeOfDay, string description, int turnsElapsed, int roundsElapsed, int secondsElapsed, DateTime startTime, DateTime endTime)
+        {
+            Id = id;
+            TimeOfEncounter = timeOfDay;
+            Description = description;
+            TurnsElapsed = turnsElapsed;
+            RoundsElapsed = roundsElapsed;
+            SecondsElapsed = secondsElapsed;
+            StartTime = startTime;
+            EndTime = endTime;
+        }
     }
 
     public class Action
@@ -35,6 +59,7 @@ namespace EncounterSimulator.Models
 
     public enum TimeOfDay
     {
+        Unknown,
         Dawn,
         Morning,
         Afternoon,
